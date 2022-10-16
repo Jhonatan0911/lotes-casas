@@ -1,0 +1,63 @@
+<div class="container pt-5">
+  <div class="row mb-3">
+    <div class="col-12 col-md-12 mb-3">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <h2 class="center primary"> <strong> Bienvenido</strong> </h2>
+          <h4 class="center"> Llene el formulario para registrar su proyecto </h4>
+
+          <form (ngSubmit)="submit()" [formGroup]="form">
+            <div class="row mb-3">
+              <div class="col-12 col-md-6">
+                <mat-form-field class="w-100" appearance="outline">
+                  <mat-label>Nombres del paciente</mat-label>
+                  <input type="text" matInput formControlName="nombre" maxlength="50" required>
+                  <mat-error *ngIf="validate('nombre')">
+                    {{ check('nombre') }}
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-12 col-md-6">
+                <mat-form-field class="w-100" appearance="outline">
+                  <mat-label>Correo</mat-label>
+                  <input type="email" matInput formControlName="correo" required maxlength="50">
+                  <mat-error *ngIf="validate('correo')">
+                    {{ check('correo') }}
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-12 col-md-6">
+                <mat-form-field class="w-100" appearance="outline">
+                  <mat-label>Telefono</mat-label>
+                  <input type="text" matInput formControlName="telefono" maxlength="15">
+                  <mat-error *ngIf="validate('telefono')">
+                    {{ check('telefono') }}
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-12 col-md-6">
+                <mat-form-field class="w-100" appearance="outline">
+                  <mat-label>Proyecto</mat-label>
+                  <mat-select  matNativeControl formControlName="proyecto" required>
+                    <mat-option value="casa">Casa</mat-option>
+                    <mat-option value="lote">Lote</mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="validate('proyecto')">
+                    {{ check('proyecto') }}
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <button mat-flat-button class="w-100 btn-primary" [disabled]="loading" type="submit">{{loading ? "Guardando..." : "Guardar"}}</button>
+          </form>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

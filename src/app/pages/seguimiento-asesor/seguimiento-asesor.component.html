@@ -1,0 +1,16 @@
+<div class="container pt-5">
+  <div class="row mb-3">
+    <div class="col-12 col-md-12 mb-3">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <h2 class="center primary"> <strong> Modúlo de seguimiento </strong> </h2>
+          <ng2-smart-table [settings]="settings" [source]="table" (edit)="openModal($event)"></ng2-smart-table>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,51 @@
+<div class="d-flex justify-content-between">
+  <h2 class="center primary"> <strong> Crear nuevo usuario </strong> </h2>
+
+  <span class="example-spacer"></span>
+  <button type="button" class="h4"mat-icon-button (click)="onClose()">
+    <mat-icon aria-label="Side nav toggle icon">close</mat-icon>
+  </button>
+</div>
+<form (ngSubmit)="submit()" [formGroup]="form">
+  <div class="row mb-3">
+    <div class="col-12 col-md-6">
+      <mat-form-field class="w-100" appearance="outline">
+        <mat-label>Nombre</mat-label>
+        <input type="text" matInput formControlName="nombre" maxlength="50" required>
+        <mat-error *ngIf="validate('nombre')">
+          {{ check('nombre') }}
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="col-12 col-md-6">
+      <mat-form-field class="w-100" appearance="outline">
+        <mat-label>Rol</mat-label>
+        <mat-select  matNativeControl formControlName="rol" required>
+          <mat-option value="Asesor"> Asesor </mat-option>
+          <mat-option value="Admin"> Admin </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <div class="col-12 col-md-6">
+      <mat-form-field class="w-100" appearance="outline">
+        <mat-label>Correo</mat-label>
+        <input type="email" matInput formControlName="correo" maxlength="50" required>
+        <mat-error *ngIf="validate('email')">
+          {{ check('email') }}
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="col-12 col-md-6">
+      <mat-form-field class="w-100" appearance="outline">
+        <mat-label>Contraseña</mat-label>
+        <input type="password" matInput formControlName="contraseña" minlength="6" required>
+        <mat-error *ngIf="validate('contraseña')">
+          {{ check('contraseña') }}
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+  <button mat-flat-button class="w-100 btn-primary" [disabled]="loading" type="submit">{{loading ? "Guardar" : "Guardando"}}</button>
+</form>

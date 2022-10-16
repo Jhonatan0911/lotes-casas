@@ -1,0 +1,31 @@
+<div class="d-flex justify-content-between">
+  <h2 class="center primary"> <strong> Proyecto {{data.project.name}} </strong> </h2>
+  <h4 class="center" *ngIf="data.reasignacion"> Reasignar un asesor y cambia el proyecto </h4>
+  <h4 class="center" *ngIf="!data.reasignacion"> Asignar un asesor </h4>
+
+  <span class="example-spacer"></span>
+  <button type="button" class="h4"mat-icon-button (click)="onClose()">
+    <mat-icon aria-label="Side nav toggle icon">close</mat-icon>
+  </button>
+</div>
+<form (ngSubmit)="submit()" [formGroup]="form">
+  <div class="row mb-3">
+    <div class="col-12 col-md-6">
+      <mat-form-field class="w-100" appearance="outline">
+        <mat-label>Asesor</mat-label>
+        <mat-select  matNativeControl formControlName="asesor" required>
+          <mat-option value=""> </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="col-12 col-md-6" *ngIf="data.reasignacion">
+      <mat-form-field class="w-100" appearance="outline">
+        <mat-label>Proyecto</mat-label>
+        <mat-select  matNativeControl formControlName="proyecto" required>
+          <mat-option value=""> </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+  <button mat-flat-button class="w-100 btn-primary" [disabled]="loading" type="submit">{{data.reasignacion ? "Reasignar" : "Asignar"}}</button>
+</form>

@@ -1,0 +1,34 @@
+<div class="mx-5 pt-5">
+  <div class="row mb-3">
+    <div class="col-12 col-md-12 mb-3">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <h2 class="center primary mb-3"> <strong> Modúlo de seguimiento y reasignación </strong> </h2>
+          <div class="row my-3">
+            <div class="col-8">
+              <ng2-smart-table [settings]="settings" [source]="table" (edit)="openModal($event)" (userRowSelect)="viewSeguimiento($event)"></ng2-smart-table>
+            </div>
+            <div *ngIf="segumiento" class="col-4 px-5">
+              <h3 class="center mb-3"> <strong> Proyecto - </strong> </h3>
+              <div *ngIf="comentarios.length <= 0">
+                <h3 class="center mb-3"> <strong> Aún no hay comentarios </strong> </h3>
+              </div>
+              <div *ngIf="comentarios.length > 0">
+                <h4> <strong> Comentarios </strong> </h4>
+                <br>
+                <div *ngFor="let comentario of comentarios">
+                  <p> <strong> Estado: </strong> {{comentario.estado}}</p>
+                  <p class="mb-3"> {{comentario.comentario}} </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>
