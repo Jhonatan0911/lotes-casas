@@ -15,18 +15,18 @@
               <div class="col-12 col-md-6">
                 <mat-form-field class="w-100" appearance="outline">
                   <mat-label>Nombres del paciente</mat-label>
-                  <input type="text" matInput formControlName="nombre" maxlength="50" required>
-                  <mat-error *ngIf="validate('nombre')">
-                    {{ check('nombre') }}
+                  <input type="text" matInput formControlName="NombreCompleto" maxlength="50" required>
+                  <mat-error *ngIf="validate('NombreCompleto')">
+                    {{ check('NombreCompleto') }}
                   </mat-error>
                 </mat-form-field>
               </div>
               <div class="col-12 col-md-6">
                 <mat-form-field class="w-100" appearance="outline">
                   <mat-label>Correo</mat-label>
-                  <input type="email" matInput formControlName="correo" required maxlength="50">
-                  <mat-error *ngIf="validate('correo')">
-                    {{ check('correo') }}
+                  <input type="email" matInput formControlName="Correo" required maxlength="50">
+                  <mat-error *ngIf="validate('Correo')">
+                    {{ check('Correo') }}
                   </mat-error>
                 </mat-form-field>
               </div>
@@ -35,21 +35,33 @@
               <div class="col-12 col-md-6">
                 <mat-form-field class="w-100" appearance="outline">
                   <mat-label>Telefono</mat-label>
-                  <input type="text" matInput formControlName="telefono" maxlength="15">
-                  <mat-error *ngIf="validate('telefono')">
-                    {{ check('telefono') }}
+                  <input type="text" matInput formControlName="Telefono" maxlength="15">
+                  <mat-error *ngIf="validate('Telefono')">
+                    {{ check('Telefono') }}
                   </mat-error>
                 </mat-form-field>
               </div>
               <div class="col-12 col-md-6">
                 <mat-form-field class="w-100" appearance="outline">
                   <mat-label>Proyecto</mat-label>
-                  <mat-select  matNativeControl formControlName="proyecto" required>
-                    <mat-option value="casa">Casa</mat-option>
-                    <mat-option value="lote">Lote</mat-option>
+                  <mat-select  matNativeControl formControlName="ProyectoId" required>
+                    <mat-option *ngFor="let item of proyectos" [value]="item.Id">{{item.Descripcion}}</mat-option>
                   </mat-select>
-                  <mat-error *ngIf="validate('proyecto')">
-                    {{ check('proyecto') }}
+                  <mat-error *ngIf="validate('Proyecto')">
+                    {{ check('Proyecto') }}
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-12 col-md-12">
+                <mat-form-field class="w-100" appearance="outline">
+                  <mat-label>Origen</mat-label>
+                  <mat-select  matNativeControl formControlName="OrigenId" required>
+                    <mat-option *ngFor="let item of origenes" [value]="item.Id">{{item.Descripcion}}</mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="validate('OrigenId')">
+                    {{ check('OrigenId') }}
                   </mat-error>
                 </mat-form-field>
               </div>
