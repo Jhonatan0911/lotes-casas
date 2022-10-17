@@ -12,12 +12,15 @@ import { MainComponent } from './pages/main/main.component';
 import { AsignacionComponent } from './pages/asignacion/asignacion.component';
 import { SeguimientoComponent } from './pages/seguimiento/seguimiento.component';
 import { SeguimientoAsesorComponent } from './pages/seguimiento-asesor/seguimiento-asesor.component';
+import { LoginComponent } from './pages/login/login.component';
+import { Acceso } from './security/acceso';
 
 const routes: Routes = [
   { path: '',
     component: MainLayoutComponent,
     children: [
       { path: '', component: MainComponent },
+      { path: 'login', component: LoginComponent },
     ]
   },
   { path: '',
@@ -25,13 +28,15 @@ const routes: Routes = [
     children: [
       { path: 'asignacion', component: AsignacionComponent },
       { path: 'segumiento', component: SeguimientoComponent },
-    ]
+    ],
+    canActivate: [Acceso]
   },
   { path: '',
     component: AsesorLayoutComponent,
     children: [
       { path: 'asesor', component: SeguimientoAsesorComponent },
-    ]
+    ],
+    canActivate: [Acceso]
   },
 ];
 @NgModule({

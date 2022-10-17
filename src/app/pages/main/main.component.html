@@ -47,8 +47,8 @@
                   <mat-select  matNativeControl formControlName="ProyectoId" required>
                     <mat-option *ngFor="let item of proyectos" [value]="item.Id">{{item.Descripcion}}</mat-option>
                   </mat-select>
-                  <mat-error *ngIf="validate('Proyecto')">
-                    {{ check('Proyecto') }}
+                  <mat-error *ngIf="validate('ProyectoId')">
+                    {{ check('ProyectoId') }}
                   </mat-error>
                 </mat-form-field>
               </div>

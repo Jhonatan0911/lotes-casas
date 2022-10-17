@@ -19,6 +19,8 @@ import { SeguimientoAsesorComponent } from './pages/seguimiento-asesor/seguimien
 import { ModalSeguimientoComponent } from './components/modal-seguimiento/modal-seguimiento.component';
 import { ModalUsuarioComponent } from './components/modal-usuario/modal-usuario.component';
 import { UsuariosComponent } from './pages/usuarios/usuarios.component';
+import { LoginComponent } from './pages/login/login.component';
+
 
 @NgModule({
   declarations: [
@@ -34,6 +36,7 @@ import { UsuariosComponent } from './pages/usuarios/usuarios.component';
     ModalSeguimientoComponent,
     ModalUsuarioComponent,
     UsuariosComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +50,8 @@ import { UsuariosComponent } from './pages/usuarios/usuarios.component';
     ReactiveFormsModule,
     Ng2SmartTableModule
   ],
-  providers: [],
+  providers: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

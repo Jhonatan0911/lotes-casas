@@ -4,7 +4,6 @@ import { FormGroup } from '@angular/forms';
 @Injectable({
   providedIn: 'root'
 })
-
 export class ErrorService {
 
   constructor() { }

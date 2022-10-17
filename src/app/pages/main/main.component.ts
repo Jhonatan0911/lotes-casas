@@ -5,6 +5,7 @@ import { BaseFormComponent } from 'src/app/components/baseComponent';
 import { CombosService } from 'src/app/services/combos.service';
 import { ComboText } from 'src/app/models/combos/combo';
 import { ToastService } from 'src/app/services/toast.service';
+import { MainFormService } from 'src/app/services/main-form.service';
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
@@ -46,6 +47,7 @@ export class MainComponent extends BaseFormComponent implements OnInit {
     private combosService: CombosService,
     private errorService: ErrorService,
     private toastService: ToastService,
+    private MainFormService: MainFormService
   ) {
     super();
   }
@@ -89,7 +91,29 @@ export class MainComponent extends BaseFormComponent implements OnInit {
   }
 
   submit(){
+    if (this.form.valid) {
+      this.loadingMain = true;
+      this.form.disable()
 
+      this.MainFormService.create(this.form.value).subscribe({
+        next: (req) => {
+          console.log(req)
+          this.loadingMain = false;
+          this.toastService.showToast('Creado Correctamente');
+        },
+        error: (err: string) => {
+          console.log(err)
+          this.loadingMain = false;
+          this.form.enable();
+          this.toastService.showToast(err, 'error');
+        },
+        complete: () => {
+          this.loadingMain = false;
+          this.form.reset();
+          this.form.enable();
+        },
+      });
+    }
   }
 
 }

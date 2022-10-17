@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { catchError, map, retry, tap } from 'rxjs/operators';
 import { ComboText } from '../models/combos/combo';
-import { BaseService } from './base.service';
+import { BaseService } from './baseService';
 
 @Injectable({
   providedIn: 'root'
