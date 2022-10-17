@@ -1,0 +1,29 @@
+<div class="container-fluid px-1 px-md-5 px-lg-1 px-xl-5 py-5 mx-auto">
+  <div class="card border-0 shadow-lg">
+    <div class="row d-flex">
+      <div class="col-lg-6">
+        <div class="pb-5">
+          <div class="row"> <img src="assets/img/logo.jpeg" class="logo"> </div>
+          <div class="row px-3 justify-content-center mt-4 mb-5 border-line"> <img src="https://i.imgur.com/uNGdWHi.png" class="image"> </div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="card2 card border-0 px-4 py-5">
+          <h1 class="bold">INGRESAR</h1>
+          <h5> Coloca tus credenciales e ingresa a la plataforma </h5>
+          <form (ngSubmit)="login()" [formGroup]="form">
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>Correo electrónico</mat-label>
+              <input type="email" matInput formControlName="email" required>
+            </mat-form-field>
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>Clave de acceso</mat-label>
+              <input type="password" matInput formControlName="password" required>
+            </mat-form-field>
+            <button mat-flat-button class="w-100 btn-primary" [disabled]="loading" type="submit">{{loading ? "Validando información..." : "Ingresar"}}</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,35 @@
+.logo {
+  width: 300px;
+  height: 100px;
+  margin-top: 20px;
+  margin-left: 35px
+}
+
+.image {
+  width: 360px;
+  height: 280px
+}
+
+.border-line {
+  border-right: 1px solid #EEEEEE
+}
+
+@media screen and (max-width: 991px) {
+  .logo {
+    margin-left: 0px
+  }
+
+  .image {
+    width: 300px;
+    height: 220px
+  }
+
+  .border-line {
+    border-right: none
+  }
+
+  .card2 {
+    border-top: 1px solid #EEEEEE !important;
+    margin: 0px 15px
+  }
+}
