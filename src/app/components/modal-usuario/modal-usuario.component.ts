@@ -51,6 +51,7 @@ export class ModalUsuarioComponent extends BaseFormComponent implements OnInit {
   }
 
   cargaPerfiles() {
+    this.loadingMain = true;
     this.combosService.getPerfiles().subscribe({
       next: (req) => {
         this.perfiles = req;
@@ -58,6 +59,7 @@ export class ModalUsuarioComponent extends BaseFormComponent implements OnInit {
       },
       error: (err: string) => {
         this.toastService.showToast(err, 'error');
+        this.loadingMain = false;
       }
     });
   }
@@ -87,6 +89,7 @@ export class ModalUsuarioComponent extends BaseFormComponent implements OnInit {
           this.loadingMain = false;
           this.form.reset();
           this.form.enable();
+          this.dialogRef.close(true);
         },
       });
     }

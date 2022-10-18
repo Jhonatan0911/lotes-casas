@@ -15,7 +15,7 @@ import { Paginacion } from 'src/app/models/paginacion/paginacion';
 })
 export class AsignacionComponent extends BaseFormComponent implements OnInit {
 
-  proyectos!: tablaProyecto;
+  proyectos!: any;
 
   table: LocalDataSource = new LocalDataSource;
   actions = {
@@ -89,17 +89,17 @@ export class AsignacionComponent extends BaseFormComponent implements OnInit {
   }
 
   reload(){
-
+    this.cargaProyectos();
   }
 
   cargaProyectos(){
     let paginacion : Paginacion = {
       page: 1,
-      limit: 1,
+      limit: 10,
     }
     this.ProyectosService.getProyectos(paginacion).subscribe({
       next: (req: any) => {
-        this.proyectos = req.filter((project:any) => !project.AsesorId)
+        this.proyectos = req.rows.filter((project:any) => !project.Asesor)
         this.loadingMain = false;
         this.createTable();
       },
@@ -110,9 +110,10 @@ export class AsignacionComponent extends BaseFormComponent implements OnInit {
   }
 
   createTable() {
+    console.log(this.proyectos)
     this.table = new LocalDataSource;
     let dataUser: any = [];
-    this.proyectos.rows.forEach((response:any) => {
+    this.proyectos.forEach((response:any) => {
       dataUser.push(
         {
           id: response?.Id,

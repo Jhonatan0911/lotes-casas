@@ -103,7 +103,7 @@ export class UsuariosComponent implements OnInit {
   }
 
   reload(){
-
+    this.cargaUsuarios();
   }
 
   cargaUsuarios() {

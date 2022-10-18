@@ -38,11 +38,7 @@ export class ModalAsignacionComponent extends BaseFormComponent implements OnIni
 
   ngOnInit(): void {
     console.log(this.data);
-    if(!this.data.proyecto){
-      this.form.controls['Id'].setValue(this.data.data.id);
-    }else{
-      this.form.controls['Id'].setValidators(Validators.required);
-    }
+    this.form.controls['Id'].setValue(this.data.data.id);
     this.cargaAsesores();
     this.cargaProyectos();
   }
@@ -50,7 +46,7 @@ export class ModalAsignacionComponent extends BaseFormComponent implements OnIni
   cargaProyectos(){
     let paginacion : Paginacion = {
       page: 1,
-      limit: 1,
+      limit: 10,
     }
     this.ProyectosService.getProyectos(paginacion).subscribe({
       next: (req: tablaProyecto) => {
@@ -86,24 +82,47 @@ export class ModalAsignacionComponent extends BaseFormComponent implements OnIni
       this.loadingMain = true;
       this.form.disable()
 
-      this.AsignacionService.asignar(this.form.value).subscribe({
-        next: (req) => {
-          console.log(req)
-          this.loadingMain = false;
-          this.toastService.showToast('Asignado Correctamente');
-        },
-        error: (err: string) => {
-          console.log(err)
-          this.loadingMain = false;
-          this.form.enable();
-          this.toastService.showToast(err, 'error');
-        },
-        complete: () => {
-          this.loadingMain = false;
-          this.form.reset();
-          this.form.enable();
-        },
-      });
+      if(this.data.data?.asesor){
+        this.AsignacionService.reasignar(this.form.value).subscribe({
+          next: (req) => {
+            console.log(req)
+            this.loadingMain = false;
+            this.toastService.showToast('Reasignado Correctamente');
+          },
+          error: (err: string) => {
+            console.log(err)
+            this.loadingMain = false;
+            this.form.enable();
+            this.toastService.showToast(err, 'error');
+          },
+          complete: () => {
+            this.loadingMain = false;
+            this.form.reset();
+            this.form.enable();
+            this.dialogRef.close(true);
+          },
+        });
+      }else{
+        this.AsignacionService.asignar(this.form.value).subscribe({
+          next: (req) => {
+            console.log(req)
+            this.loadingMain = false;
+            this.toastService.showToast('Asignado Correctamente');
+          },
+          error: (err: string) => {
+            console.log(err)
+            this.loadingMain = false;
+            this.form.enable();
+            this.toastService.showToast(err, 'error');
+          },
+          complete: () => {
+            this.loadingMain = false;
+            this.form.reset();
+            this.form.enable();
+            this.dialogRef.close(true);
+          },
+        });
+      }
     }
   }
 }

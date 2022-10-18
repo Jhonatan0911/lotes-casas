@@ -32,7 +32,7 @@ export class UsuariosService extends BaseService {
 
   create(data: any): Observable<Usuario[]> {
     return this.http
-      .post<any>(this._baseUrl + this.apiUrl + "registrar", data)
+      .post<any>(this._baseUrl + this.apiUrl + "/registrar", data)
       .pipe(
         map((response) => response),
         tap((a) => {

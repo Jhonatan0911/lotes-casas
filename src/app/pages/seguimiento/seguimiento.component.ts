@@ -98,17 +98,17 @@ export class SeguimientoComponent extends BaseFormComponent implements OnInit {
   }
 
   reload(){
-
+    this.cargaProyectos();
   }
 
   cargaProyectos(){
     let paginacion : Paginacion = {
       page: 1,
-      limit: 1,
+      limit: 10,
     }
     this.ProyectosService.getProyectos(paginacion).subscribe({
       next: (req: any) => {
-        this.proyectos = req.rows.filter((project:any) => project.AsesorId != null)
+        this.proyectos = req.rows.filter((project:any) => project.Asesor)
         this.loadingMain = false;
         this.createTable();
       },
