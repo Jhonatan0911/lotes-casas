@@ -95,6 +95,35 @@ export class ModalUsuarioComponent extends BaseFormComponent implements OnInit {
     }
   }
 
+  eliminar() {
+    this.loadingMain = true;
+    this.form.disable()
+
+    let object: any = {
+      id: this.data.data.id
+    }
+    console.log(object)
+    this.UsuariosService.desactivar(object).subscribe({
+      next: (req) => {
+        console.log(req)
+        this.loadingMain = false;
+        this.toastService.showToast('Creado Correctamente');
+      },
+      error: (err: string) => {
+        console.log(err)
+        this.loadingMain = false;
+        this.form.enable();
+        this.toastService.showToast(err, 'error');
+      },
+      complete: () => {
+        this.loadingMain = false;
+        this.form.reset();
+        this.form.enable();
+        this.dialogRef.close(true);
+      },
+    });
+  }
+
   validate(nameInput: string) {
     return this.ErrorService.validateInput(this.form, nameInput);
   }

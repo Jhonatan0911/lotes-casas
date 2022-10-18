@@ -22,6 +22,7 @@ import { UsuariosComponent } from './pages/usuarios/usuarios.component';
 import { LoginComponent } from './pages/login/login.component';
 import { CookieService } from 'ngx-cookie-service';
 import { Interceptor } from './security/Interceptors';
+import { ModalConfirmacionComponent } from './components/modal-confirmacion/modal-confirmacion.component';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { Interceptor } from './security/Interceptors';
     ModalSeguimientoComponent,
     ModalUsuarioComponent,
     UsuariosComponent,
-    LoginComponent
+    LoginComponent,
+    ModalConfirmacionComponent
   ],
   imports: [
     BrowserModule,

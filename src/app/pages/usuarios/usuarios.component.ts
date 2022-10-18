@@ -137,6 +137,7 @@ export class UsuariosComponent implements OnInit {
     this.usuarios.forEach((response:any) => {
       dataUser.push(
         {
+          id: response?.id,
           name: response?.NombreCompleto,
           user: response?.Usuario,
           email: response?.Correo,

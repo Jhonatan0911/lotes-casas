@@ -59,3 +59,4 @@
   </div>
   <button mat-flat-button class="w-100 btn-primary" [disabled]="loading" type="submit">{{!loadingMain ? "Guardar" : "Guardando"}}</button>
 </form>
+<button mat-flat-button class="w-100 btn-danger mt-3" (click)="eliminar()" [disabled]="loading">{{!loadingMain ? "Eliminar" : "Eliminando"}}</button>

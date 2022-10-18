@@ -47,6 +47,12 @@ a {
   background-color: #E2E2E2 !important;
 }
 
+.btn-danger{
+  background-color: #a51818 !important;
+  color: #fff !important;
+
+}
+
 /* Botones globales */
 .btn-primary{
   background-color: #0E1F61 !important;
@@ -71,6 +77,11 @@ a {
 }
 .btn-third:hover{
   background-color: #188d36 !important;
+}
+.btn-danger:hover{
+  background-color: #8a1010 !important;
+  color: #fff !important;
+
 }
 
 .white{

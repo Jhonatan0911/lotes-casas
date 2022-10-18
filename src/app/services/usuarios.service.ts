@@ -42,4 +42,17 @@ export class UsuariosService extends BaseService {
         catchError(this.errorMgmt)
       );
   }
+
+  desactivar(data: any): Observable<Usuario[]> {
+    return this.http
+      .put<any>(this._baseUrl + this.apiUrl + "/desactivar", data)
+      .pipe(
+        map((response) => response),
+        tap((a) => {
+          this.logs('desactivar usario');
+          this.logs(a);
+        }),
+        catchError(this.errorMgmt)
+      );
+  }
 }
