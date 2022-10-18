@@ -1,1 +1,27 @@
-<p>usuarios works!</p>
+<div class="container pt-5">
+  <div class="row mb-3">
+    <div class="col-12 col-md-12 mb-3">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="row">
+            <div class="col-10">
+              <h2 class="center primary"> <strong> Administar usuarios </strong> </h2>
+            </div>
+            <div class="col-2">
+              <button mat-flat-button class="btn-primary w-100" (click)="openModal()">
+                <mat-icon mat-list-icon>add</mat-icon>
+                Nuevo {{rol}}
+              </button>
+            </div>
+          </div>
+          <ng2-smart-table [settings]="settings" [source]="table" (edit)="openModal($event)"></ng2-smart-table>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>
+

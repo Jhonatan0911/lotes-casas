@@ -3,6 +3,10 @@ import { BaseFormComponent } from '../baseComponent';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ErrorService } from 'src/app/services/error.service';
+import { CombosService } from 'src/app/services/combos.service';
+import { ComboText } from 'src/app/models/combos/combo';
+import { ToastService } from 'src/app/services/toast.service';
+import { UsuariosService } from 'src/app/services/usuarios.service';
 
 @Component({
   selector: 'app-modal-usuario',
@@ -11,7 +15,12 @@ import { ErrorService } from 'src/app/services/error.service';
 })
 export class ModalUsuarioComponent extends BaseFormComponent implements OnInit {
 
+  perfiles: ComboText[] = [];
+
   constructor(
+    private combosService: CombosService,
+    private UsuariosService: UsuariosService,
+    private toastService: ToastService,
     private ErrorService: ErrorService,
     public dialogRef: MatDialogRef<ModalUsuarioComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
@@ -20,13 +29,37 @@ export class ModalUsuarioComponent extends BaseFormComponent implements OnInit {
   }
 
   form = new FormGroup({
-    nombre: new FormControl(''),
-    rol: new FormControl(''),
-    correo: new FormControl(''),
-    contraseña: new FormControl(''),
+    NombreCompleto: new FormControl(''),
+    Usuario: new FormControl(''),
+    Clave: new FormControl(''),
+    Correo: new FormControl(''),
+    PerfilId: new FormControl(''),
   })
 
   ngOnInit(): void {
+    console.log(this.data)
+    this.cargaPerfiles();
+    if (this.data.editMode) {
+      this.form.patchValue({
+        NombreCompleto: this.data.data.name,
+        Usuario: this.data.data.user,
+        Clave: this.data.data.contraseña,
+        Correo: this.data.data.email,
+        PerfilId: this.data.data.perfil,
+      });
+    }
+  }
+
+  cargaPerfiles() {
+    this.combosService.getPerfiles().subscribe({
+      next: (req) => {
+        this.perfiles = req;
+        this.loadingMain = false;
+      },
+      error: (err: string) => {
+        this.toastService.showToast(err, 'error');
+      }
+    });
   }
 
   onClose(): void {
@@ -35,7 +68,27 @@ export class ModalUsuarioComponent extends BaseFormComponent implements OnInit {
 
   submit() {
     if (this.form.valid) {
-      this.loading = true;
+      this.loadingMain = true;
+      this.form.disable()
+
+      this.UsuariosService.create(this.form.value).subscribe({
+        next: (req) => {
+          console.log(req)
+          this.loadingMain = false;
+          this.toastService.showToast('Creado Correctamente');
+        },
+        error: (err: string) => {
+          console.log(err)
+          this.loadingMain = false;
+          this.form.enable();
+          this.toastService.showToast(err, 'error');
+        },
+        complete: () => {
+          this.loadingMain = false;
+          this.form.reset();
+          this.form.enable();
+        },
+      });
     }
   }
 

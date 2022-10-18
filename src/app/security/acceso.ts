@@ -32,7 +32,7 @@ export class Acceso implements CanActivate {
     this.loginId = this.LoginService.getToken();
     //this.icon = this.loginId.charAt(0)
 
-    //this.m.datos(this.loginId);
+    // console.log(this.loginId);
 
     if (this.loginId == "" || this.loginId == undefined) {
       const tree: UrlTree = this.router.parseUrl(this._baseUrlLogin);

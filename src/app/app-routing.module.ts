@@ -14,20 +14,22 @@ import { SeguimientoComponent } from './pages/seguimiento/seguimiento.component'
 import { SeguimientoAsesorComponent } from './pages/seguimiento-asesor/seguimiento-asesor.component';
 import { LoginComponent } from './pages/login/login.component';
 import { Acceso } from './security/acceso';
+import { UsuariosComponent } from './pages/usuarios/usuarios.component';
 
 const routes: Routes = [
   { path: '',
     component: MainLayoutComponent,
     children: [
-      { path: '', component: MainComponent },
-      { path: 'login', component: LoginComponent },
+      { path: '', component: LoginComponent },
     ]
   },
   { path: '',
     component: GerenteLayoutComponent,
     children: [
+      { path: 'main', component: MainComponent },
+      { path: 'usuarios/:type', component: UsuariosComponent },
       { path: 'asignacion', component: AsignacionComponent },
-      { path: 'segumiento', component: SeguimientoComponent },
+      { path: 'seguimiento', component: SeguimientoComponent },
     ],
     canActivate: [Acceso]
   },

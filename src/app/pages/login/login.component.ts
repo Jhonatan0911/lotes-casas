@@ -23,8 +23,8 @@ export class LoginComponent extends BaseFormComponent implements OnInit {
   loading: boolean = false;
 
   form = new FormGroup({
-    email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required]),
+    Usuario: new FormControl('', [Validators.required]),
+    Clave: new FormControl('', [Validators.required]),
   })
 
   ngOnInit(): void { }
@@ -36,7 +36,7 @@ export class LoginComponent extends BaseFormComponent implements OnInit {
       this.LoginService.login(this.form.value).subscribe({
         next: (req) => {
           this.LoginService.setToken(req);
-            this.router.navigate(["/"]);
+            this.router.navigate(["/main"]);
         },
         error: (err: string) => {
           this.ToastService.showToast(err, 'error');

@@ -13,12 +13,12 @@
           <h5> Coloca tus credenciales e ingresa a la plataforma </h5>
           <form (ngSubmit)="login()" [formGroup]="form">
             <mat-form-field class="w-100" appearance="outline">
-              <mat-label>Correo electrónico</mat-label>
-              <input type="email" matInput formControlName="email" required>
+              <mat-label>Usuario</mat-label>
+              <input type="text" matInput formControlName="Usuario" required>
             </mat-form-field>
             <mat-form-field class="w-100" appearance="outline">
               <mat-label>Clave de acceso</mat-label>
-              <input type="password" matInput formControlName="password" required>
+              <input type="password" matInput formControlName="Clave" required>
             </mat-form-field>
             <button mat-flat-button class="w-100 btn-primary" [disabled]="loading" type="submit">{{loading ? "Validando información..." : "Ingresar"}}</button>
           </form>

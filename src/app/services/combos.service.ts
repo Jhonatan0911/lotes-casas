@@ -52,4 +52,17 @@ export class CombosService extends BaseService {
         catchError(this.errorMgmt)
       );
   }
+
+  getPerfiles(): Observable<ComboText[]> {
+    return this.http
+      .get<ComboText[]>(this._baseUrl + "/api/usuarios/perfiles/")
+      .pipe(
+        map((response) => response),
+        tap((a) => {
+          this.logs('consulta de perfiles');
+          this.logs(a);
+        }),
+        catchError(this.errorMgmt)
+      );
+  }
 }

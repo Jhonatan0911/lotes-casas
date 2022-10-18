@@ -25,6 +25,7 @@
     "@angular/router": "~13.2.0",
     "ng2-completer": "^9.0.1",
     "ng2-smart-table": "^1.7.2",
+    "ngx-cookie-service": "^14.0.1",
     "onesignal-ngx": "^1.0.1",
     "rxjs": "~6.6.0",
     "rxjs-compat": "^6.6.7",

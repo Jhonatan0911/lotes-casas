@@ -1,5 +1,5 @@
 <div class="d-flex justify-content-between">
-  <h2 class="center primary"> <strong> Crear nuevo usuario </strong> </h2>
+  <h2 class="center primary"> <strong> {{data.label}} nuevo usuario </strong> </h2>
 
   <span class="example-spacer"></span>
   <button type="button" class="h4"mat-icon-button (click)="onClose()">
@@ -11,18 +11,17 @@
     <div class="col-12 col-md-6">
       <mat-form-field class="w-100" appearance="outline">
         <mat-label>Nombre</mat-label>
-        <input type="text" matInput formControlName="nombre" maxlength="50" required>
-        <mat-error *ngIf="validate('nombre')">
-          {{ check('nombre') }}
+        <input type="text" matInput formControlName="NombreCompleto" maxlength="50" required>
+        <mat-error *ngIf="validate('NombreCompleto')">
+          {{ check('NombreCompleto') }}
         </mat-error>
       </mat-form-field>
     </div>
     <div class="col-12 col-md-6">
       <mat-form-field class="w-100" appearance="outline">
         <mat-label>Rol</mat-label>
-        <mat-select  matNativeControl formControlName="rol" required>
-          <mat-option value="Asesor"> Asesor </mat-option>
-          <mat-option value="Admin"> Admin </mat-option>
+        <mat-select  matNativeControl formControlName="PerfilId" required>
+          <mat-option *ngFor="let item of perfiles" [value]="item.Id"> {{item.Descripcion}} </mat-option>
         </mat-select>
       </mat-form-field>
     </div>
@@ -30,19 +29,30 @@
   <div class="row mb-3">
     <div class="col-12 col-md-6">
       <mat-form-field class="w-100" appearance="outline">
-        <mat-label>Correo</mat-label>
-        <input type="email" matInput formControlName="correo" maxlength="50" required>
-        <mat-error *ngIf="validate('email')">
-          {{ check('email') }}
+        <mat-label>Usuario</mat-label>
+        <input type="text" matInput formControlName="Usuario" maxlength="50" required>
+        <mat-error *ngIf="validate('Usuario')">
+          {{ check('Usuario') }}
         </mat-error>
       </mat-form-field>
     </div>
     <div class="col-12 col-md-6">
       <mat-form-field class="w-100" appearance="outline">
+        <mat-label>Correo</mat-label>
+        <input type="email" matInput formControlName="Correo" maxlength="50" required>
+        <mat-error *ngIf="validate('Correo')">
+          {{ check('Correo') }}
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <div class="col-12 col-md-12">
+      <mat-form-field class="w-100" appearance="outline">
         <mat-label>Contraseña</mat-label>
-        <input type="password" matInput formControlName="contraseña" minlength="6" required>
-        <mat-error *ngIf="validate('contraseña')">
-          {{ check('contraseña') }}
+        <input type="password" matInput formControlName="Clave" minlength="6" required>
+        <mat-error *ngIf="validate('Clave')">
+          {{ check('Clave') }}
         </mat-error>
       </mat-form-field>
     </div>
