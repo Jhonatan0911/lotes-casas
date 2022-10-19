@@ -8,11 +8,11 @@ import { LoginService } from 'src/app/services/login.service';
 import { Router } from "@angular/router";
 
 @Component({
-  selector: 'app-gerente-layout',
-  templateUrl: './gerente-layout.component.html',
-  styleUrls: ['./gerente-layout.component.css']
+  selector: 'app-comun-layout',
+  templateUrl: './comun-layout.component.html',
+  styleUrls: ['./comun-layout.component.css']
 })
-export class GerenteLayoutComponent implements OnInit {
+export class ComunLayoutComponent implements OnInit {
 
   user: any;
 
@@ -54,5 +54,4 @@ export class GerenteLayoutComponent implements OnInit {
       }
     });
   }
-
 }

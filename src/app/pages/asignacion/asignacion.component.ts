@@ -4,7 +4,6 @@ import { Ng2SmartTableModule, LocalDataSource } from 'ng2-smart-table';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalAsignacionComponent } from 'src/app/components/modal-asignacion/modal-asignacion.component';
 import { ProyectosService } from 'src/app/services/proyectos.service';
-import { tablaProyecto } from 'src/app/models/Proyecto/Proyecto';
 import { ToastService } from 'src/app/services/toast.service';
 import { Paginacion } from 'src/app/models/paginacion/paginacion';
 

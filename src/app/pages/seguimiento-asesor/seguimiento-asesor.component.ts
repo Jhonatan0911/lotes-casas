@@ -3,6 +3,10 @@ import { BaseFormComponent } from 'src/app/components/baseComponent';
 import { Ng2SmartTableModule, LocalDataSource } from 'ng2-smart-table';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalSeguimientoComponent } from 'src/app/components/modal-seguimiento/modal-seguimiento.component';
+import { ProyectosService } from 'src/app/services/proyectos.service';
+import { ToastService } from 'src/app/services/toast.service';
+import { Paginacion } from 'src/app/models/paginacion/paginacion';
+import { tablaProyecto } from 'src/app/models/Proyecto/Proyecto';
 
 @Component({
   selector: 'app-seguimiento-asesor',
@@ -10,6 +14,8 @@ import { ModalSeguimientoComponent } from 'src/app/components/modal-seguimiento/
   styleUrls: ['./seguimiento-asesor.component.css']
 })
 export class SeguimientoAsesorComponent extends BaseFormComponent implements OnInit {
+
+  proyectos!: tablaProyecto;
 
   table: LocalDataSource = new LocalDataSource;
   actions = {
@@ -61,11 +67,14 @@ export class SeguimientoAsesorComponent extends BaseFormComponent implements OnI
 
   constructor(
     public dialog: MatDialog,
+    private toastService: ToastService,
+    public ProyectosService: ProyectosService
   ) {
     super();
    }
 
-  ngOnInit(): void {
+   ngOnInit(): void {
+    this.cargaProyectos();
   }
 
   openModal(data?: any) {
@@ -88,7 +97,42 @@ export class SeguimientoAsesorComponent extends BaseFormComponent implements OnI
   }
 
   reload(){
+    this.cargaProyectos();
+  }
 
+  cargaProyectos(){
+    let paginacion : Paginacion = {
+      page: 1,
+      limit: 10,
+    }
+    this.ProyectosService.getProyectos(paginacion).subscribe({
+      next: (req: any) => {
+        this.proyectos = req;
+        this.loadingMain = false;
+        this.createTable();
+      },
+      error: (err: string) => {
+        this.toastService.showToast(err, 'error');
+      }
+    });
+  }
+
+  createTable() {
+    console.log(this.proyectos)
+    this.table = new LocalDataSource;
+    let dataUser: any = [];
+    this.proyectos.rows.forEach((response:any) => {
+      dataUser.push(
+        {
+          id: response?.Id,
+          name: response?.NombreCompleto,
+          phone: response?.Telefono,
+          email: response?.Correo,
+          project: response?.Proyecto.Descripcion,
+        }
+      );
+    })
+    this.table = new LocalDataSource(dataUser);
   }
 
 }

@@ -22,7 +22,7 @@ export class ProyectosService extends BaseService {
       .pipe(
         map((response) => response),
         tap((a) => {
-          this.logs('consulta de origenes');
+          this.logs('consulta de proyectos');
           this.logs(a);
         }),
         catchError(this.errorMgmt)

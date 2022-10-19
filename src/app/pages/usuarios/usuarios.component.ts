@@ -75,8 +75,8 @@ export class UsuariosComponent implements OnInit {
     }
     if(this.ruta.snapshot.params){
       this.type = this.ruta.snapshot.params?.['type'];
-      if(this.type != 'clientes' && this.type != 'tecnicos' && this.type != 'admin'){
-        this.router.navigate(['home']);
+      if(this.type != 'admin' && this.type != 'asesor' && this.type != 'gerente' && this.type != 'comun'){
+        this.router.navigate(['main']);
       }
     }
     this.cargaUsuarios();
@@ -91,6 +91,7 @@ export class UsuariosComponent implements OnInit {
       data: {
         data: data?.data,
         editMode: editMode,
+        rol: this.rol,
         label: editMode ? "Editar" : "Crear",
       }
     });
@@ -111,14 +112,19 @@ export class UsuariosComponent implements OnInit {
       next: (req: Usuario[]) => {
         if(this.type == 'gerente'){
           this.rol = 'Gerente';
-          this.usuarios = req.filter((gerente:any) => gerente.Id_Perfil == 'gerente')
+          this.usuarios = req.filter((gerente:any) => gerente.Id_Perfil == 'Gerente')
         }else{
           if(this.type == 'admin'){
             this.rol = 'Administrador';
-            this.usuarios = req.filter((admin:any) => admin?.Id_Perfil == 'admin')
+            this.usuarios = req.filter((admin:any) => admin?.Id_Perfil == 'Admin')
           }else{
-            this.rol = 'Asesor';
-            this.usuarios = req.filter((asesor:any) => asesor?.Id_Perfil == 'asesor')
+            if(this.type == 'comun'){
+              this.rol = 'Común';
+              this.usuarios = req.filter((admin:any) => admin?.Id_Perfil == 'Comun')
+            }else{
+              this.rol = 'Asesor';
+              this.usuarios = req.filter((asesor:any) => asesor?.Id_Perfil == 'Asesor')
+            }
           }
         }
         this.usuarios = req;

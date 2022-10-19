@@ -23,6 +23,10 @@ import { LoginComponent } from './pages/login/login.component';
 import { CookieService } from 'ngx-cookie-service';
 import { Interceptor } from './security/Interceptors';
 import { ModalConfirmacionComponent } from './components/modal-confirmacion/modal-confirmacion.component';
+import { OrigenesComponent } from './pages/origenes/origenes.component';
+import { ProyectosComponent } from './pages/proyectos/proyectos.component';
+import { ComunLayoutComponent } from './layouts/comun-layout/comun-layout.component';
+import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 
 
 @NgModule({
@@ -40,7 +44,11 @@ import { ModalConfirmacionComponent } from './components/modal-confirmacion/moda
     ModalUsuarioComponent,
     UsuariosComponent,
     LoginComponent,
-    ModalConfirmacionComponent
+    ModalConfirmacionComponent,
+    OrigenesComponent,
+    ProyectosComponent,
+    ComunLayoutComponent,
+    AdminLayoutComponent
   ],
   imports: [
     BrowserModule,

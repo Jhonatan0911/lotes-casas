@@ -29,15 +29,31 @@ export class ModalUsuarioComponent extends BaseFormComponent implements OnInit {
   }
 
   form = new FormGroup({
-    NombreCompleto: new FormControl(''),
-    Usuario: new FormControl(''),
+    NombreCompleto: new FormControl('',[
+      Validators.required,
+      Validators.minLength(5),
+      Validators.maxLength(50),
+      Validators.pattern(this.latin)]
+    ),
+    Usuario: new FormControl('', [
+      Validators.required,
+      Validators.minLength(5),
+      Validators.maxLength(50),
+      Validators.pattern(this.latin)]
+    ),
     Clave: new FormControl(''),
-    Correo: new FormControl(''),
+    Correo: new FormControl('', [
+      Validators.required,
+      Validators.maxLength(50),
+      Validators.email]
+    ),
     PerfilId: new FormControl(''),
   })
 
   ngOnInit(): void {
     console.log(this.data)
+    this.form.controls['PerfilId'].setValue(this.data.rol);
+
     this.cargaPerfiles();
     if (this.data.editMode) {
       this.form.patchValue({

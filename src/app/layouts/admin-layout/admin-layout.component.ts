@@ -8,11 +8,11 @@ import { LoginService } from 'src/app/services/login.service';
 import { Router } from "@angular/router";
 
 @Component({
-  selector: 'app-gerente-layout',
-  templateUrl: './gerente-layout.component.html',
-  styleUrls: ['./gerente-layout.component.css']
+  selector: 'app-admin-layout',
+  templateUrl: './admin-layout.component.html',
+  styleUrls: ['./admin-layout.component.css']
 })
-export class GerenteLayoutComponent implements OnInit {
+export class AdminLayoutComponent implements OnInit {
 
   user: any;
 

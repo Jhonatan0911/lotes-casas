@@ -15,19 +15,37 @@ import { SeguimientoAsesorComponent } from './pages/seguimiento-asesor/seguimien
 import { LoginComponent } from './pages/login/login.component';
 import { Acceso } from './security/acceso';
 import { UsuariosComponent } from './pages/usuarios/usuarios.component';
+import { ComunLayoutComponent } from './layouts/comun-layout/comun-layout.component';
+import { ProyectosComponent } from './pages/proyectos/proyectos.component';
+import { OrigenesComponent } from './pages/origenes/origenes.component';
+import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 
 const routes: Routes = [
   { path: '',
     component: MainLayoutComponent,
     children: [
-      { path: '', component: LoginComponent },
+      { path: 'login', component: LoginComponent },
     ]
+  },
+  { path: '',
+    component: ComunLayoutComponent,
+    children: [
+      { path: 'main', component: MainComponent }
+    ],
+    canActivate: [Acceso]
+  },
+  { path: '',
+    component: AdminLayoutComponent,
+    children: [
+      { path: 'usuarios/:type', component: UsuariosComponent },
+      { path: 'proyectos', component: ProyectosComponent },
+      { path: 'origenes', component: OrigenesComponent },
+    ],
+    canActivate: [Acceso]
   },
   { path: '',
     component: GerenteLayoutComponent,
     children: [
-      { path: 'main', component: MainComponent },
-      { path: 'usuarios/:type', component: UsuariosComponent },
       { path: 'asignacion', component: AsignacionComponent },
       { path: 'seguimiento', component: SeguimientoComponent },
     ],

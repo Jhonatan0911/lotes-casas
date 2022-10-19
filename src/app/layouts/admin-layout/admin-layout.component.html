@@ -4,14 +4,32 @@
     <mat-toolbar> <strong>Menú</strong></mat-toolbar>
     <mat-nav-list>
       <div>
-        <h2 matSubheader> Gestionar proyectos </h2>
-        <a mat-list-item routerLink="/asignar" routerLinkActive="primary">
+        <h2 matSubheader> Inicio </h2>
+        <a mat-list-item routerLink="/origenes" routerLinkActive="primary">
           <mat-icon matListIcon> assignment </mat-icon>
-          Asignar
+          Origenes
         </a>
-        <a mat-list-item routerLink="/reasignar" routerLinkActive="primary">
+        <a mat-list-item routerLink="/proyectos" routerLinkActive="primary">
           <mat-icon matListIcon> assignment </mat-icon>
-          Reasignar
+          Proyectos
+        </a>
+        <mat-divider></mat-divider>
+        <h2 matSubheader > Gestionar usuarios </h2>
+        <a mat-list-item routerLink="/usuarios/admin" routerLinkActive="primary">
+          <mat-icon matListIcon> person </mat-icon>
+          Administradores
+        </a>
+        <a mat-list-item routerLink="/usuarios/gerente" routerLinkActive="primary">
+          <mat-icon matListIcon> person </mat-icon>
+          Gerente
+        </a>
+        <a mat-list-item routerLink="/usuarios/asesor" routerLinkActive="primary">
+          <mat-icon matListIcon> people </mat-icon>
+          Asesor
+        </a>
+        <a mat-list-item routerLink="/usuarios/comun" routerLinkActive="primary">
+          <mat-icon matListIcon> people </mat-icon>
+          Común
         </a>
         <mat-divider></mat-divider>
       </div>
@@ -26,7 +44,7 @@
       <span > <strong>APUnidos  - Control de proyectos</strong> </span>
       <span class="example-spacer"></span>
       <span class="mr-5 d-none d-md-block" >{{user}} - </span>
-      <span class="mr-5 d-none d-md-block"> Gerente </span>
+      <span class="mr-5 d-none d-md-block"> Administrador</span>
       <button mat-icon-button class="ml-5 example-icon favorite-icon" aria-label="icon-button" (click)="logout()">
         <mat-icon>logout</mat-icon>
       </button>
