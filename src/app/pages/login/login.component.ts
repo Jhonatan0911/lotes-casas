@@ -27,22 +27,41 @@ export class LoginComponent extends BaseFormComponent implements OnInit {
     Clave: new FormControl('', [Validators.required]),
   })
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.LoginService.deleteToken();
+   }
 
   login() {
     if (this.form.valid) {
-      this.loadingMain = true;
+      this.loading = true;
 
       this.LoginService.login(this.form.value).subscribe({
         next: (req) => {
-          this.LoginService.setToken(req);
-            this.router.navigate(["/main"]);
+          this.LoginService.rol = req.Perfil;
+          this.LoginService.nombre = req.NombreCompleto;
+          this.LoginService.setToken(req.token);
+          switch (req.Perfil) {
+            case "Admin":
+              this.router.navigate(["/origenes"]);
+              break;
+            case "Comun":
+              this.router.navigate(["/main"]);
+              break;
+            case "Asesor":
+              this.router.navigate(["/asesor"]);
+              break;
+            case "Gerente":
+              this.router.navigate(["/asignacion"]);
+              break;
+            default:
+              break;
+          }
         },
         error: (err: string) => {
           this.ToastService.showToast(err, 'error');
-          this.loadingMain = false
+          this.loading = false
         },
-        complete: () => this.loadingMain = false
+        complete: () => this.loading = false
       })
     }
   }

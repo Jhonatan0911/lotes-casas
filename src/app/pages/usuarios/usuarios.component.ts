@@ -108,31 +108,31 @@ export class UsuariosComponent implements OnInit {
   }
 
   cargaUsuarios() {
+    this.loadingMain = true;
     this.UsuariosService.getUsuarios().subscribe({
       next: (req: Usuario[]) => {
         if(this.type == 'gerente'){
           this.rol = 'Gerente';
-          this.usuarios = req.filter((gerente:any) => gerente.Id_Perfil == 'Gerente')
+          this.usuarios = req.filter((gerente:any) => gerente.Perfil.Descripcion == 'Gerente')
         }else{
           if(this.type == 'admin'){
             this.rol = 'Administrador';
-            this.usuarios = req.filter((admin:any) => admin?.Id_Perfil == 'Admin')
+            this.usuarios = req.filter((admin:any) => admin.Perfil.Descripcion == 'Admin')
           }else{
             if(this.type == 'comun'){
               this.rol = 'Común';
-              this.usuarios = req.filter((admin:any) => admin?.Id_Perfil == 'Comun')
+              this.usuarios = req.filter((admin:any) => admin.Perfil.Descripcion == 'Comun')
             }else{
               this.rol = 'Asesor';
-              this.usuarios = req.filter((asesor:any) => asesor?.Id_Perfil == 'Asesor')
+              this.usuarios = req.filter((asesor:any) => asesor.Perfil.Descripcion == 'Asesor')
             }
           }
         }
-        this.usuarios = req;
-        this.loadingMain = false;
         this.createTable();
       },
       error: (err: string) => {
         this.toastService.showToast(err, 'error');
+        this.loadingMain = false;
       }
     });
   }
@@ -147,12 +147,14 @@ export class UsuariosComponent implements OnInit {
           name: response?.NombreCompleto,
           user: response?.Usuario,
           email: response?.Correo,
-          perfil: response?.PerfilId,
+          perfil: response?.Perfil.Descripcion,
+          perfilId: response?.PerfilId,
           contraseña: response?.Clave,
         }
       );
     })
     this.table = new LocalDataSource(dataUser);
+    this.loadingMain = false;
   }
 
 }

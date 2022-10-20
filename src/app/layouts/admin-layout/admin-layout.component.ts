@@ -7,6 +7,7 @@ import { ModalConfirmacionComponent } from 'src/app/components/modal-confirmacio
 import { LoginService } from 'src/app/services/login.service';
 import { Router } from "@angular/router";
 
+
 @Component({
   selector: 'app-admin-layout',
   templateUrl: './admin-layout.component.html',
@@ -26,18 +27,17 @@ export class AdminLayoutComponent implements OnInit {
     private router: Router,
     public dialog: MatDialog,
     private breakpointObserver: BreakpointObserver,
-    private LoginService: LoginService
+    public LoginService: LoginService
   ) { }
 
-  rol: any = "admin";
-
-
   ngOnInit(): void {
+    this.getUser();
   }
 
 
   getUser() {
-    this.user = localStorage.getItem("name");
+    this.user = this.LoginService.nombre;
+    console.log(this.user)
   }
 
   logout(){
@@ -50,7 +50,9 @@ export class AdminLayoutComponent implements OnInit {
     .subscribe((confirmado: Boolean) => {
       if (confirmado) {
         this.LoginService.deleteToken();
-        this.router.navigateByUrl("/login");
+        this.LoginService.rol = "";
+        this.LoginService.nombre = "";
+        this.router.navigateByUrl("/");
       }
     });
   }

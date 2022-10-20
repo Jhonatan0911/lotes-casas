@@ -31,5 +31,5 @@
       </mat-form-field>
     </div>
   </div>
-  <button mat-flat-button class="w-100 btn-primary" [disabled]="loading" type="submit">{{data.proyecto ? "Reasignar" : "Asignar"}}</button>
+  <button mat-flat-button class="w-100 btn-primary" [disabled]="!form.valid || loading" type="submit">{{data.proyecto ? "Reasignar" : "Asignar"}}</button>
 </form>

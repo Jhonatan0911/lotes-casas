@@ -56,13 +56,15 @@ export class ModalUsuarioComponent extends BaseFormComponent implements OnInit {
 
     this.cargaPerfiles();
     if (this.data.editMode) {
+      this.form.disable();
       this.form.patchValue({
         NombreCompleto: this.data.data.name,
         Usuario: this.data.data.user,
         Clave: this.data.data.contraseña,
         Correo: this.data.data.email,
-        PerfilId: this.data.data.perfil,
+        PerfilId: this.data.data.perfilId,
       });
+      this.form.enable();
     }
   }
 
@@ -86,23 +88,23 @@ export class ModalUsuarioComponent extends BaseFormComponent implements OnInit {
 
   submit() {
     if (this.form.valid) {
-      this.loadingMain = true;
+      this.loading = true;
       this.form.disable()
 
       this.UsuariosService.create(this.form.value).subscribe({
         next: (req) => {
           console.log(req)
-          this.loadingMain = false;
+          this.loading = false;
           this.toastService.showToast('Creado Correctamente');
         },
         error: (err: string) => {
           console.log(err)
-          this.loadingMain = false;
+          this.loading = false;
           this.form.enable();
           this.toastService.showToast(err, 'error');
         },
         complete: () => {
-          this.loadingMain = false;
+          this.loading = false;
           this.form.reset();
           this.form.enable();
           this.dialogRef.close(true);
@@ -112,7 +114,7 @@ export class ModalUsuarioComponent extends BaseFormComponent implements OnInit {
   }
 
   eliminar() {
-    this.loadingMain = true;
+    this.loading = true;
     this.form.disable()
 
     let object: any = {
@@ -122,17 +124,17 @@ export class ModalUsuarioComponent extends BaseFormComponent implements OnInit {
     this.UsuariosService.desactivar(object).subscribe({
       next: (req) => {
         console.log(req)
-        this.loadingMain = false;
+        this.loading = false;
         this.toastService.showToast('Creado Correctamente');
       },
       error: (err: string) => {
         console.log(err)
-        this.loadingMain = false;
+        this.loading = false;
         this.form.enable();
         this.toastService.showToast(err, 'error');
       },
       complete: () => {
-        this.loadingMain = false;
+        this.loading = false;
         this.form.reset();
         this.form.enable();
         this.dialogRef.close(true);

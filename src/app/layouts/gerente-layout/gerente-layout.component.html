@@ -9,7 +9,7 @@
           <mat-icon matListIcon> assignment </mat-icon>
           Asignar
         </a>
-        <a mat-list-item routerLink="/reasignar" routerLinkActive="primary">
+        <a mat-list-item routerLink="/seguimiento" routerLinkActive="primary">
           <mat-icon matListIcon> assignment </mat-icon>
           Reasignar
         </a>
@@ -25,7 +25,7 @@
       </button>
       <span > <strong>APUnidos  - Control de proyectos</strong> </span>
       <span class="example-spacer"></span>
-      <span class="mr-5 d-none d-md-block" >{{user}} - </span>
+      <span class="mr-5 d-none d-md-block" >{{LoginService.nombre}} - </span>
       <span class="mr-5 d-none d-md-block"> Gerente </span>
       <button mat-icon-button class="ml-5 example-icon favorite-icon" aria-label="icon-button" (click)="logout()">
         <mat-icon>logout</mat-icon>

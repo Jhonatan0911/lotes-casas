@@ -67,23 +67,23 @@ export class ModalSeguimientoComponent extends BaseFormComponent implements OnIn
 
   submit() {
     if (this.form.valid) {
-      this.loadingMain = true;
+      this.loading = true;
       this.form.disable()
 
       this.SeguimientoService.create(this.form.value).subscribe({
         next: (req) => {
           console.log(req)
-          this.loadingMain = false;
+          this.loading = false;
           this.toastService.showToast('Creado Correctamente');
         },
         error: (err: string) => {
           console.log(err)
-          this.loadingMain = false;
+          this.loading = false;
           this.form.enable();
           this.toastService.showToast(err, 'error');
         },
         complete: () => {
-          this.loadingMain = false;
+          this.loading = false;
           this.form.reset();
           this.form.enable();
           this.dialogRef.close(true);

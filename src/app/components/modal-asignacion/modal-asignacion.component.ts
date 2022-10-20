@@ -79,24 +79,24 @@ export class ModalAsignacionComponent extends BaseFormComponent implements OnIni
 
   submit() {
     if (this.form.valid) {
-      this.loadingMain = true;
+      this.loading = true;
       this.form.disable()
 
       if(this.data.data?.asesor){
         this.AsignacionService.reasignar(this.form.value).subscribe({
           next: (req) => {
             console.log(req)
-            this.loadingMain = false;
+            this.loading = false;
             this.toastService.showToast('Reasignado Correctamente');
           },
           error: (err: string) => {
             console.log(err)
-            this.loadingMain = false;
+            this.loading = false;
             this.form.enable();
             this.toastService.showToast(err, 'error');
           },
           complete: () => {
-            this.loadingMain = false;
+            this.loading = false;
             this.form.reset();
             this.form.enable();
             this.dialogRef.close(true);
@@ -106,17 +106,17 @@ export class ModalAsignacionComponent extends BaseFormComponent implements OnIni
         this.AsignacionService.asignar(this.form.value).subscribe({
           next: (req) => {
             console.log(req)
-            this.loadingMain = false;
+            this.loading = false;
             this.toastService.showToast('Asignado Correctamente');
           },
           error: (err: string) => {
             console.log(err)
-            this.loadingMain = false;
+            this.loading = false;
             this.form.enable();
             this.toastService.showToast(err, 'error');
           },
           complete: () => {
-            this.loadingMain = false;
+            this.loading = false;
             this.form.reset();
             this.form.enable();
             this.dialogRef.close(true);

@@ -101,14 +101,14 @@ export class SeguimientoAsesorComponent extends BaseFormComponent implements OnI
   }
 
   cargaProyectos(){
+    this.loadingMain = true;
     let paginacion : Paginacion = {
       page: 1,
-      limit: 10,
+      limit: 1000,
     }
     this.ProyectosService.getProyectos(paginacion).subscribe({
       next: (req: any) => {
         this.proyectos = req;
-        this.loadingMain = false;
         this.createTable();
       },
       error: (err: string) => {
@@ -133,6 +133,7 @@ export class SeguimientoAsesorComponent extends BaseFormComponent implements OnI
       );
     })
     this.table = new LocalDataSource(dataUser);
+    this.loadingMain = false;
   }
 
 }

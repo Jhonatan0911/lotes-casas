@@ -26,7 +26,7 @@ export class GerenteLayoutComponent implements OnInit {
     private router: Router,
     public dialog: MatDialog,
     private breakpointObserver: BreakpointObserver,
-    private LoginService: LoginService
+    public LoginService: LoginService
   ) { }
 
   rol: any = "admin";
@@ -50,7 +50,9 @@ export class GerenteLayoutComponent implements OnInit {
     .subscribe((confirmado: Boolean) => {
       if (confirmado) {
         this.LoginService.deleteToken();
-        this.router.navigateByUrl("/login");
+        this.LoginService.rol = "";
+        this.LoginService.nombre = "";
+        this.router.navigateByUrl("/");
       }
     });
   }

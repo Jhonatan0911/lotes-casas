@@ -6,7 +6,6 @@ import { MainLayoutComponent } from './layouts/main-layout/main-layout.component
 import { AsesorLayoutComponent } from './layouts/asesor-layout/asesor-layout.component';
 import { GerenteLayoutComponent } from './layouts/gerente-layout/gerente-layout.component';
 
-
 //pages
 import { MainComponent } from './pages/main/main.component';
 import { AsignacionComponent } from './pages/asignacion/asignacion.component';
@@ -19,12 +18,13 @@ import { ComunLayoutComponent } from './layouts/comun-layout/comun-layout.compon
 import { ProyectosComponent } from './pages/proyectos/proyectos.component';
 import { OrigenesComponent } from './pages/origenes/origenes.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
+import { EstadosComponent } from './pages/estados/estados.component';
 
 const routes: Routes = [
   { path: '',
     component: MainLayoutComponent,
     children: [
-      { path: 'login', component: LoginComponent },
+      { path: '', component: LoginComponent },
     ]
   },
   { path: '',
@@ -40,6 +40,7 @@ const routes: Routes = [
       { path: 'usuarios/:type', component: UsuariosComponent },
       { path: 'proyectos', component: ProyectosComponent },
       { path: 'origenes', component: OrigenesComponent },
+      { path: 'estados', component: EstadosComponent },
     ],
     canActivate: [Acceso]
   },

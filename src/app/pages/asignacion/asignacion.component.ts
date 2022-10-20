@@ -92,14 +92,14 @@ export class AsignacionComponent extends BaseFormComponent implements OnInit {
   }
 
   cargaProyectos(){
+    this.loadingMain = true;
     let paginacion : Paginacion = {
       page: 1,
-      limit: 10,
+      limit: 100,
     }
     this.ProyectosService.getProyectos(paginacion).subscribe({
       next: (req: any) => {
-        this.proyectos = req.rows.filter((project:any) => !project.Asesor)
-        this.loadingMain = false;
+        this.proyectos = req.rows.filter((project:any) => !project.AsesorId)
         this.createTable();
       },
       error: (err: string) => {
@@ -119,11 +119,12 @@ export class AsignacionComponent extends BaseFormComponent implements OnInit {
           name: response?.NombreCompleto,
           phone: response?.Telefono,
           email: response?.Correo,
-          project: response?.Proyecto.Descripcion,
+          project: response["Proyecto.Descripcion"],
         }
       );
     })
     this.table = new LocalDataSource(dataUser);
+    this.loadingMain = false;
   }
 
 }

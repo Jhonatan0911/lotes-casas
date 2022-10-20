@@ -27,6 +27,32 @@ export class CombosService extends BaseService {
       );
   }
 
+  createOrigenes(data: {Descripcion: string}): Observable<ComboText[]> {
+    return this.http
+      .post<ComboText[]>(this._baseUrl + this.apiUrl + "origenes/crear", data)
+      .pipe(
+        map((response) => response),
+        tap((a) => {
+          this.logs('crear origen');
+          this.logs(a);
+        }),
+        catchError(this.errorMgmt)
+      );
+  }
+
+  deleteOrigenes(data: any): Observable<any> {
+    return this.http
+      .delete<any>(this._baseUrl + this.apiUrl + "origenes/eliminar", data)
+      .pipe(
+        map((response) => response),
+        tap((a) => {
+          this.logs('eliminar origen');
+          this.logs(a);
+        }),
+        catchError(this.errorMgmt)
+      );
+  }
+
   getProyectos(): Observable<ComboText[]> {
     return this.http
       .get<ComboText[]>(this._baseUrl + this.apiUrl + "proyectos")
@@ -40,6 +66,32 @@ export class CombosService extends BaseService {
       );
   }
 
+  createProyectos(data: {Descripcion: string}): Observable<ComboText[]> {
+    return this.http
+      .post<ComboText[]>(this._baseUrl + this.apiUrl + "proyectos/crear", data)
+      .pipe(
+        map((response) => response),
+        tap((a) => {
+          this.logs('crear proyecto');
+          this.logs(a);
+        }),
+        catchError(this.errorMgmt)
+      );
+  }
+
+  deleteProyectos(data: any): Observable<any> {
+    return this.http
+      .delete<any>(this._baseUrl + this.apiUrl + "proyectos/eliminar", data)
+      .pipe(
+        map((response) => response),
+        tap((a) => {
+          this.logs('eliminar proyecto');
+          this.logs(a);
+        }),
+        catchError(this.errorMgmt)
+      );
+  }
+
   getEstados(): Observable<ComboText[]> {
     return this.http
       .get<ComboText[]>(this._baseUrl + this.apiUrl + "estados")
@@ -47,6 +99,32 @@ export class CombosService extends BaseService {
         map((response) => response),
         tap((a) => {
           this.logs('consulta de estados');
+          this.logs(a);
+        }),
+        catchError(this.errorMgmt)
+      );
+  }
+
+  createEstados(data: {Descripcion: string}): Observable<ComboText[]> {
+    return this.http
+      .post<ComboText[]>(this._baseUrl + this.apiUrl + "estados/crear", data)
+      .pipe(
+        map((response) => response),
+        tap((a) => {
+          this.logs('crear estados');
+          this.logs(a);
+        }),
+        catchError(this.errorMgmt)
+      );
+  }
+
+  deleteEstados(data: any): Observable<any> {
+    return this.http
+      .delete<any>(this._baseUrl + this.apiUrl + "estados/eliminar", data)
+      .pipe(
+        map((response) => response),
+        tap((a) => {
+          this.logs('eliminar estados');
           this.logs(a);
         }),
         catchError(this.errorMgmt)

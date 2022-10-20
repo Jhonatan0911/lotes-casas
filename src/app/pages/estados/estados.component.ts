@@ -4,17 +4,17 @@ import { Ng2SmartTableModule, LocalDataSource } from 'ng2-smart-table';
 import { ToastService } from 'src/app/services/toast.service';
 import { CombosService } from 'src/app/services/combos.service';
 import { ComboText } from 'src/app/models/combos/combo';
-import { ModalOrigenComponent } from 'src/app/components/modal-origen/modal-origen.component';
-import { ModalProyectoComponent } from 'src/app/components/modal-proyecto/modal-proyecto.component';
 import { ModalConfirmacionComponent } from 'src/app/components/modal-confirmacion/modal-confirmacion.component';
-@Component({
-  selector: 'app-proyectos',
-  templateUrl: './proyectos.component.html',
-  styleUrls: ['./proyectos.component.css']
-})
-export class ProyectosComponent implements OnInit {
+import { ModalEstadoComponent } from 'src/app/components/modal-estado/modal-estado.component';
 
-  proyectos: ComboText[] = [];
+@Component({
+  selector: 'app-estados',
+  templateUrl: './estados.component.html',
+  styleUrls: ['./estados.component.css']
+})
+export class EstadosComponent implements OnInit {
+
+  estados: ComboText[] = [];
 
   table: LocalDataSource = new LocalDataSource;
   actions = {
@@ -53,16 +53,16 @@ export class ProyectosComponent implements OnInit {
     public dialog: MatDialog,
     private CombosService: CombosService,
     private toastService: ToastService,
+
   ) { }
 
-
   ngOnInit(): void {
-    this.cargaProyectos();
+    this.cargaEstados();
   }
 
 
   openModal() {
-    const dialogRef = this.dialog.open(ModalProyectoComponent, {
+    const dialogRef = this.dialog.open(ModalEstadoComponent, {
       disableClose: true,
       width: '600px',
       data: {
@@ -78,15 +78,15 @@ export class ProyectosComponent implements OnInit {
   }
 
   reload(){
-    this.cargaProyectos();
+    this.cargaEstados();
   }
 
-  cargaProyectos() {
+  cargaEstados() {
     this.loadingMain = true;
-    this.CombosService.getProyectos().subscribe({
-      next: (req: any[]) => {
+    this.CombosService.getEstados().subscribe({
+      next: (req: ComboText[]) => {
 
-        this.proyectos = req;
+        this.estados = req;
         this.createTable();
       },
       error: (err: string) => {
@@ -98,7 +98,7 @@ export class ProyectosComponent implements OnInit {
   createTable() {
     this.table = new LocalDataSource;
     let dataUser: any = [];
-    this.proyectos.forEach((response:any) => {
+    this.estados.forEach((response:any) => {
       dataUser.push(
         {
           id: response?.Id,
@@ -115,13 +115,13 @@ export class ProyectosComponent implements OnInit {
     this.dialog.open(ModalConfirmacionComponent, {
       disableClose: true,
       width: '300px',
-      data: {message: '¿Estas seguro de eliminar el proyecto: ' + row.data.descripcion + '?'}
+      data: {message: '¿Estas seguro de eliminar el estado: ' + row.data.descripcion + '?'}
     })
     .afterClosed()
     .subscribe((confirmado: Boolean) => {
       if (confirmado) {
-        this.CombosService.deleteProyectos({Id: row.data.id});
-        this.cargaProyectos();
+        this.CombosService.deleteEstados({Id: row.data.id});
+        this.cargaEstados();
       }
     });
   }

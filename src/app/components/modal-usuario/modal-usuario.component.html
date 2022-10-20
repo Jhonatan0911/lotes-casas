@@ -57,6 +57,6 @@
       </mat-form-field>
     </div>
   </div>
-  <button mat-flat-button class="w-100 btn-primary" [disabled]="loading" type="submit">{{data.editMode ? "Editar" : "Guardar"}}</button>
+  <button mat-flat-button class="w-100 btn-primary" [disabled]="!form.valid || loading" type="submit">{{data.editMode ? "Editar" : "Guardar"}}</button>
 </form>
 <button mat-flat-button class="w-100 btn-danger mt-3" (click)="eliminar()" [disabled]="loading" *ngIf="data.editMode">{{!loadingMain ? "Eliminar" : "Eliminando"}}</button>

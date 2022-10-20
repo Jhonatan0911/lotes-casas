@@ -7,6 +7,7 @@ import { ProyectosService } from 'src/app/services/proyectos.service';
 import { tablaProyecto } from 'src/app/models/Proyecto/Proyecto';
 import { ToastService } from 'src/app/services/toast.service';
 import { Paginacion } from 'src/app/models/paginacion/paginacion';
+import { SeguimientoService } from 'src/app/services/seguimiento.service';
 
 @Component({
   selector: 'app-seguimiento',
@@ -15,9 +16,11 @@ import { Paginacion } from 'src/app/models/paginacion/paginacion';
 })
 export class SeguimientoComponent extends BaseFormComponent implements OnInit {
 
-  segumiento : boolean = true;
+  seguimiento : boolean = false;
   comentarios: any = [];
   proyectos!: any;
+  projectSelect: string = "";
+  loandingComentarios = false;
 
 
   table: LocalDataSource = new LocalDataSource;
@@ -56,7 +59,7 @@ export class SeguimientoComponent extends BaseFormComponent implements OnInit {
       project: {
         title: 'Proyecto'
       },
-      segumiento: {
+      seguimiento: {
         title: 'Último seguimiento'
       },
       asesor: {
@@ -69,7 +72,8 @@ export class SeguimientoComponent extends BaseFormComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
     private toastService: ToastService,
-    public ProyectosService: ProyectosService
+    public ProyectosService: ProyectosService,
+    public SeguimientoService: SeguimientoService
   ) {
     super();
   }
@@ -102,14 +106,14 @@ export class SeguimientoComponent extends BaseFormComponent implements OnInit {
   }
 
   cargaProyectos(){
+    this.loadingMain = true;
     let paginacion : Paginacion = {
       page: 1,
       limit: 10,
     }
     this.ProyectosService.getProyectos(paginacion).subscribe({
       next: (req: any) => {
-        this.proyectos = req.rows.filter((project:any) => project.Asesor)
-        this.loadingMain = false;
+        this.proyectos = req.rows.filter((project:any) => project.AsesorId)
         this.createTable();
       },
       error: (err: string) => {
@@ -124,22 +128,40 @@ export class SeguimientoComponent extends BaseFormComponent implements OnInit {
     this.proyectos.forEach((response:any) => {
       dataUser.push(
         {
-          id: response?.Id,
-          name: response?.NombreCompleto,
-          phone: response?.Telefono,
-          email: response?.Correo,
-          project: response?.Proyecto.Descripcion,
-          seguimiento: response?.Proyecto.FechaModificacion,
-          asesor: response?.Asesor.NombreCompleto,
-          asesorJoin: response?.Asesor,
+          id: response.Id,
+          name: response.NombreCompleto,
+          phone: response.Telefono,
+          email: response.Correo,
+          project: response["Proyecto.Descripcion"],
+          seguimiento: response["Pri_Cliente_Seguimientos.FechaCreacion"],
+          asesor: response["Asesor.NombreCompleto"],
+          asesorJoin: response.Asesor,
         }
       );
     })
     this.table = new LocalDataSource(dataUser);
+    this.loadingMain = false;
   }
 
   viewSeguimiento(data: any){
-    this.segumiento = true;
+    this.loandingComentarios = true;
+    this.seguimiento = true;
+    this.projectSelect = data.data.name;
+    let object = {
+      ClienteId: data.data.id
+    }
+
+    this.SeguimientoService.consultar(object).subscribe({
+      next: (req: any) => {
+        this.comentarios = req;
+        this.loandingComentarios = false;
+      },
+      error: (err: string) => {
+        this.toastService.showToast(err, 'error');
+        this.loandingComentarios = false;
+
+      }
+    });
   }
 
 }

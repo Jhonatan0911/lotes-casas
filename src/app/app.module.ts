@@ -27,6 +27,10 @@ import { OrigenesComponent } from './pages/origenes/origenes.component';
 import { ProyectosComponent } from './pages/proyectos/proyectos.component';
 import { ComunLayoutComponent } from './layouts/comun-layout/comun-layout.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
+import { ModalOrigenComponent } from './components/modal-origen/modal-origen.component';
+import { ModalProyectoComponent } from './components/modal-proyecto/modal-proyecto.component';
+import { EstadosComponent } from './pages/estados/estados.component';
+import { ModalEstadoComponent } from './components/modal-estado/modal-estado.component';
 
 
 @NgModule({
@@ -48,7 +52,11 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
     OrigenesComponent,
     ProyectosComponent,
     ComunLayoutComponent,
-    AdminLayoutComponent
+    AdminLayoutComponent,
+    ModalOrigenComponent,
+    ModalProyectoComponent,
+    EstadosComponent,
+    ModalEstadoComponent
   ],
   imports: [
     BrowserModule,
