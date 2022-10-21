@@ -3,8 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 //Layouts
 import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
-import { AsesorLayoutComponent } from './layouts/asesor-layout/asesor-layout.component';
-import { GerenteLayoutComponent } from './layouts/gerente-layout/gerente-layout.component';
+import { ComunLayoutComponent } from './layouts/comun-layout/comun-layout.component';
 
 //pages
 import { MainComponent } from './pages/main/main.component';
@@ -14,10 +13,8 @@ import { SeguimientoAsesorComponent } from './pages/seguimiento-asesor/seguimien
 import { LoginComponent } from './pages/login/login.component';
 import { Acceso } from './security/acceso';
 import { UsuariosComponent } from './pages/usuarios/usuarios.component';
-import { ComunLayoutComponent } from './layouts/comun-layout/comun-layout.component';
 import { ProyectosComponent } from './pages/proyectos/proyectos.component';
 import { OrigenesComponent } from './pages/origenes/origenes.component';
-import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { EstadosComponent } from './pages/estados/estados.component';
 
 const routes: Routes = [
@@ -35,9 +32,9 @@ const routes: Routes = [
     canActivate: [Acceso]
   },
   { path: '',
-    component: AdminLayoutComponent,
+    component: ComunLayoutComponent,
     children: [
-      { path: 'usuarios/:type', component: UsuariosComponent },
+      { path: 'usuarios', component: UsuariosComponent },
       { path: 'proyectos', component: ProyectosComponent },
       { path: 'origenes', component: OrigenesComponent },
       { path: 'estados', component: EstadosComponent },
@@ -45,15 +42,15 @@ const routes: Routes = [
     canActivate: [Acceso]
   },
   { path: '',
-    component: GerenteLayoutComponent,
+    component: ComunLayoutComponent,
     children: [
-      { path: 'asignacion', component: AsignacionComponent },
+      { path: 'asignar', component: AsignacionComponent },
       { path: 'seguimiento', component: SeguimientoComponent },
     ],
     canActivate: [Acceso]
   },
   { path: '',
-    component: AsesorLayoutComponent,
+    component: ComunLayoutComponent,
     children: [
       { path: 'asesor', component: SeguimientoAsesorComponent },
     ],

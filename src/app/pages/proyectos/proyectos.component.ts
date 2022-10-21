@@ -120,8 +120,17 @@ export class ProyectosComponent implements OnInit {
     .afterClosed()
     .subscribe((confirmado: Boolean) => {
       if (confirmado) {
-        this.CombosService.deleteProyectos({Id: row.data.id});
-        this.cargaProyectos();
+        let object = {
+          Id: row.data.id
+        }
+        this.CombosService.deleteProyectos(object).subscribe({
+          next: (req: any) => {
+            this.cargaProyectos();
+          },
+          error: (err: string) => {
+            this.toastService.showToast(err, 'error');
+          }
+        });;
       }
     });
   }

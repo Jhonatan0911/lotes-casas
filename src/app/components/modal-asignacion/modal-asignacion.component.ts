@@ -9,6 +9,8 @@ import { ProyectosService } from 'src/app/services/proyectos.service';
 import { ToastService } from 'src/app/services/toast.service';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 import { AsignacionService } from 'src/app/services/asignacion.service';
+import { CombosService } from 'src/app/services/combos.service';
+import { ComboText } from 'src/app/models/combos/combo';
 
 @Component({
   selector: 'app-modal-asignacion',
@@ -18,13 +20,14 @@ import { AsignacionService } from 'src/app/services/asignacion.service';
 export class ModalAsignacionComponent extends BaseFormComponent implements OnInit {
 
   asesores!: Usuario[];
-  proyectos!: tablaProyecto;
+  proyectos!: ComboText[];
 
   constructor(
     private toastService: ToastService,
     private AsignacionService: AsignacionService,
     private ProyectosService: ProyectosService,
     private UsuariosService: UsuariosService,
+    private CombosService: CombosService,
     public dialogRef: MatDialogRef<ModalAsignacionComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
@@ -34,22 +37,22 @@ export class ModalAsignacionComponent extends BaseFormComponent implements OnIni
   form = new FormGroup({
     Id: new FormControl(''),
     AsesorId: new FormControl('', Validators.required),
+    ProjectId: new FormControl(''),
   })
 
   ngOnInit(): void {
     console.log(this.data);
+    if(this.data.reasignacion){
+      this.form.controls['ProjectId'].setValidators(Validators.required)
+    }
     this.form.controls['Id'].setValue(this.data.data.id);
     this.cargaAsesores();
     this.cargaProyectos();
   }
 
   cargaProyectos(){
-    let paginacion : Paginacion = {
-      page: 1,
-      limit: 10,
-    }
-    this.ProyectosService.getProyectos(paginacion).subscribe({
-      next: (req: tablaProyecto) => {
+    this.CombosService.getProyectos().subscribe({
+      next: (req) => {
         this.proyectos = req;
         this.loadingMain = false;
       },

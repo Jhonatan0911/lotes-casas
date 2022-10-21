@@ -25,13 +25,18 @@ export class MainComponent extends BaseFormComponent implements OnInit {
     ),
     Correo: new FormControl('', [
       Validators.required,
-      Validators.maxLength(50),
+      Validators.maxLength(70),
       Validators.email]
     ),
     Telefono: new FormControl('',[
       Validators.required,
       Validators.minLength(9),
-      Validators.maxLength(15),
+      Validators.maxLength(10),
+      Validators.pattern(this.number)]
+    ),
+    Telefono2: new FormControl('',[
+      Validators.minLength(9),
+      Validators.maxLength(10),
       Validators.pattern(this.number)]
     ),
     ProyectoId: new FormControl('',[

@@ -5,7 +5,6 @@ import { Ng2SmartTableModule, LocalDataSource } from 'ng2-smart-table';
 import { Usuario } from 'src/app/models/Usuarios/Usuario';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 import { ToastService } from 'src/app/services/toast.service';
-import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-usuarios',
@@ -61,8 +60,6 @@ export class UsuariosComponent implements OnInit {
   };
 
   constructor(
-    private ruta: ActivatedRoute,
-    private router: Router,
     public dialog: MatDialog,
     private UsuariosService: UsuariosService,
     private toastService: ToastService,
@@ -70,15 +67,6 @@ export class UsuariosComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.router.routeReuseStrategy.shouldReuseRoute = function () {
-      return false;
-    }
-    if(this.ruta.snapshot.params){
-      this.type = this.ruta.snapshot.params?.['type'];
-      if(this.type != 'admin' && this.type != 'asesor' && this.type != 'gerente' && this.type != 'comun'){
-        this.router.navigate(['main']);
-      }
-    }
     this.cargaUsuarios();
   }
 
@@ -111,23 +99,7 @@ export class UsuariosComponent implements OnInit {
     this.loadingMain = true;
     this.UsuariosService.getUsuarios().subscribe({
       next: (req: Usuario[]) => {
-        if(this.type == 'gerente'){
-          this.rol = 'Gerente';
-          this.usuarios = req.filter((gerente:any) => gerente.Perfil.Descripcion == 'Gerente')
-        }else{
-          if(this.type == 'admin'){
-            this.rol = 'Administrador';
-            this.usuarios = req.filter((admin:any) => admin.Perfil.Descripcion == 'Admin')
-          }else{
-            if(this.type == 'comun'){
-              this.rol = 'Común';
-              this.usuarios = req.filter((admin:any) => admin.Perfil.Descripcion == 'Comun')
-            }else{
-              this.rol = 'Asesor';
-              this.usuarios = req.filter((asesor:any) => asesor.Perfil.Descripcion == 'Asesor')
-            }
-          }
-        }
+        this.usuarios = req;
         this.createTable();
       },
       error: (err: string) => {

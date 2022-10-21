@@ -120,8 +120,17 @@ export class EstadosComponent implements OnInit {
     .afterClosed()
     .subscribe((confirmado: Boolean) => {
       if (confirmado) {
-        this.CombosService.deleteEstados({Id: row.data.id});
-        this.cargaEstados();
+        let object = {
+          Id: row.data.id
+        }
+        this.CombosService.deleteEstados(object).subscribe({
+          next: (req: any) => {
+            this.cargaEstados();
+          },
+          error: (err: string) => {
+            this.toastService.showToast(err, 'error');
+          }
+        });;
       }
     });
   }

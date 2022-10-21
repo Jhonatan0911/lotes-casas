@@ -6,6 +6,7 @@ import { ModalAsignacionComponent } from 'src/app/components/modal-asignacion/mo
 import { ProyectosService } from 'src/app/services/proyectos.service';
 import { ToastService } from 'src/app/services/toast.service';
 import { Paginacion } from 'src/app/models/paginacion/paginacion';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-asignacion',
@@ -40,17 +41,26 @@ export class AsignacionComponent extends BaseFormComponent implements OnInit {
     actions: this.actions,
     pager: this.pager,
     columns: {
+      fecha: {
+        title: 'Fecha'
+      },
       name: {
         title: 'Nombre'
       },
       phone: {
         title: 'Teléfono'
       },
+      phone2: {
+        title: 'Teléfono 2'
+      },
       email: {
         title: 'Correo electronico'
       },
       project: {
         title: 'Proyecto'
+      },
+      origen: {
+        title: 'Origen'
       }
     },
     edit: this.edit
@@ -113,13 +123,19 @@ export class AsignacionComponent extends BaseFormComponent implements OnInit {
     this.table = new LocalDataSource;
     let dataUser: any = [];
     this.proyectos.forEach((response:any) => {
+      let now = moment(response.FechaCreacion);
+      now.locale('es')
+      response.FechaCreacion = now.format('DD/MM/YYYY, h:mm a')
       dataUser.push(
         {
           id: response?.Id,
+          fecha: response?.FechaCreacion,
           name: response?.NombreCompleto,
           phone: response?.Telefono,
+          phone2: response.Telefono2 ? response.Telefono2 : "Sin telefono",
           email: response?.Correo,
           project: response["Proyecto.Descripcion"],
+          origen: response["Origen.Descripcion"],
         }
       );
     })

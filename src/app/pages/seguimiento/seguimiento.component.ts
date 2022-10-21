@@ -8,6 +8,7 @@ import { tablaProyecto } from 'src/app/models/Proyecto/Proyecto';
 import { ToastService } from 'src/app/services/toast.service';
 import { Paginacion } from 'src/app/models/paginacion/paginacion';
 import { SeguimientoService } from 'src/app/services/seguimiento.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-seguimiento',
@@ -47,6 +48,9 @@ export class SeguimientoComponent extends BaseFormComponent implements OnInit {
     actions: this.actions,
     pager: this.pager,
     columns: {
+      fecha: {
+        title: 'Fecha'
+      },
       name: {
         title: 'Nombre'
       },
@@ -90,6 +94,7 @@ export class SeguimientoComponent extends BaseFormComponent implements OnInit {
       data: {
         data: data?.data,
         editMode: editMode,
+        reasignacion: true,
         label: editMode ? "Editar" : "Crear",
       }
     });
@@ -126,9 +131,13 @@ export class SeguimientoComponent extends BaseFormComponent implements OnInit {
     this.table = new LocalDataSource;
     let dataUser: any = [];
     this.proyectos.forEach((response:any) => {
+      let now = moment(response.FechaCreacion);
+      now.locale('es')
+      response.FechaCreacion = now.format('DD/MM/YYYY, h:mm a')
       dataUser.push(
         {
           id: response.Id,
+          fecha: response?.FechaCreacion,
           name: response.NombreCompleto,
           phone: response.Telefono,
           email: response.Correo,

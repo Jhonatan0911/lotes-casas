@@ -10,8 +10,6 @@ import { SeguimientoComponent } from './pages/seguimiento/seguimiento.component'
 import { AsignacionComponent } from './pages/asignacion/asignacion.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
-import { AsesorLayoutComponent } from './layouts/asesor-layout/asesor-layout.component';
-import { GerenteLayoutComponent } from './layouts/gerente-layout/gerente-layout.component';
 import { MaterialModule } from './material/material.module';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { ModalAsignacionComponent } from './components/modal-asignacion/modal-asignacion.component';
@@ -26,7 +24,6 @@ import { ModalConfirmacionComponent } from './components/modal-confirmacion/moda
 import { OrigenesComponent } from './pages/origenes/origenes.component';
 import { ProyectosComponent } from './pages/proyectos/proyectos.component';
 import { ComunLayoutComponent } from './layouts/comun-layout/comun-layout.component';
-import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { ModalOrigenComponent } from './components/modal-origen/modal-origen.component';
 import { ModalProyectoComponent } from './components/modal-proyecto/modal-proyecto.component';
 import { EstadosComponent } from './pages/estados/estados.component';
@@ -40,8 +37,6 @@ import { ModalEstadoComponent } from './components/modal-estado/modal-estado.com
     SeguimientoComponent,
     AsignacionComponent,
     MainLayoutComponent,
-    AsesorLayoutComponent,
-    GerenteLayoutComponent,
     ModalAsignacionComponent,
     SeguimientoAsesorComponent,
     ModalSeguimientoComponent,
@@ -52,7 +47,6 @@ import { ModalEstadoComponent } from './components/modal-estado/modal-estado.com
     OrigenesComponent,
     ProyectosComponent,
     ComunLayoutComponent,
-    AdminLayoutComponent,
     ModalOrigenComponent,
     ModalProyectoComponent,
     EstadosComponent,

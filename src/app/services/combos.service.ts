@@ -42,7 +42,7 @@ export class CombosService extends BaseService {
 
   deleteOrigenes(data: any): Observable<any> {
     return this.http
-      .delete<any>(this._baseUrl + this.apiUrl + "origenes/eliminar", data)
+      .delete<any>(this._baseUrl + this.apiUrl + "origenes/eliminar", { body: data })
       .pipe(
         map((response) => response),
         tap((a) => {
@@ -81,7 +81,7 @@ export class CombosService extends BaseService {
 
   deleteProyectos(data: any): Observable<any> {
     return this.http
-      .delete<any>(this._baseUrl + this.apiUrl + "proyectos/eliminar", data)
+      .delete<any>(this._baseUrl + this.apiUrl + "proyectos/eliminar", { body: data })
       .pipe(
         map((response) => response),
         tap((a) => {
@@ -120,7 +120,7 @@ export class CombosService extends BaseService {
 
   deleteEstados(data: any): Observable<any> {
     return this.http
-      .delete<any>(this._baseUrl + this.apiUrl + "estados/eliminar", data)
+      .delete(this._baseUrl + this.apiUrl + "estados/eliminar",{ body: data } )
       .pipe(
         map((response) => response),
         tap((a) => {

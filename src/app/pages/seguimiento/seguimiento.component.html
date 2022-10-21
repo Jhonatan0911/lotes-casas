@@ -1,4 +1,4 @@
-<div class="mx-5 pt-5">
+<div class="mx-3 pt-5">
   <div class="row mb-3">
     <div class="col-12 col-md-12 mb-3">
       <mat-progress-bar mode="indeterminate" *ngIf="loadingMain"></mat-progress-bar>
@@ -15,12 +15,11 @@
               <div *ngIf="comentarios.length <= 0">
                 <h3 class="center mb-3"> <strong> Aún no hay comentarios </strong> </h3>
               </div>
-              <div *ngIf="comentarios.length > 0">
+              <div class="overflow-auto" *ngIf="comentarios.length > 0">
                 <h4> <strong> Comentarios </strong> </h4>
                 <br>
                 <div *ngFor="let comentario of comentarios">
-                  <p> <strong> Estado: </strong> {{comentario.Estado}}</p>
-                  <p class="mb-3"> {{comentario.Descripcion}} </p>
+                  <p> {{comentario.FechaCreacion | date:'d/MM/YYYY, h:mm a'}} -  {{comentario.EstadoSeguimiento.Descripcion}} - {{comentario.Descripcion}}</p>
                 </div>
               </div>
             </div>

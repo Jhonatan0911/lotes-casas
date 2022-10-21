@@ -17,6 +17,9 @@ export class ModalUsuarioComponent extends BaseFormComponent implements OnInit {
 
   perfiles: ComboText[] = [];
 
+  hidePassword = true;
+  hidePassword2 = true;
+
   constructor(
     private combosService: CombosService,
     private UsuariosService: UsuariosService,
@@ -37,21 +40,20 @@ export class ModalUsuarioComponent extends BaseFormComponent implements OnInit {
     ),
     Usuario: new FormControl('', [
       Validators.required,
-      Validators.minLength(5),
-      Validators.maxLength(50),
+      Validators.maxLength(10),
       Validators.pattern(this.latin)]
     ),
     Clave: new FormControl(''),
+    Clave2: new FormControl(''),
     Correo: new FormControl('', [
       Validators.required,
-      Validators.maxLength(50),
+      Validators.maxLength(70),
       Validators.email]
     ),
     PerfilId: new FormControl(''),
   })
 
   ngOnInit(): void {
-    console.log(this.data)
     this.form.controls['PerfilId'].setValue(this.data.rol);
 
     this.cargaPerfiles();
@@ -88,28 +90,32 @@ export class ModalUsuarioComponent extends BaseFormComponent implements OnInit {
 
   submit() {
     if (this.form.valid) {
-      this.loading = true;
-      this.form.disable()
+      if(this.form.value.Clave === this.form.value.Clave2){
+        this.loading = true;
+        this.form.disable()
 
-      this.UsuariosService.create(this.form.value).subscribe({
-        next: (req) => {
-          console.log(req)
-          this.loading = false;
-          this.toastService.showToast('Creado Correctamente');
-        },
-        error: (err: string) => {
-          console.log(err)
-          this.loading = false;
-          this.form.enable();
-          this.toastService.showToast(err, 'error');
-        },
-        complete: () => {
-          this.loading = false;
-          this.form.reset();
-          this.form.enable();
-          this.dialogRef.close(true);
-        },
-      });
+        this.UsuariosService.create(this.form.value).subscribe({
+          next: (req) => {
+            console.log(req)
+            this.loading = false;
+            this.toastService.showToast('Creado Correctamente');
+          },
+          error: (err: string) => {
+            console.log(err)
+            this.loading = false;
+            this.form.enable();
+            this.toastService.showToast(err, 'error');
+          },
+          complete: () => {
+            this.loading = false;
+            this.form.reset();
+            this.form.enable();
+            this.dialogRef.close(true);
+          },
+        });
+      }else{
+        this.toastService.showToast('Las contraseñas no coinciden','error')
+      }
     }
   }
 

@@ -17,6 +17,7 @@ export class BaseService {
   }
 
   errorMgmt(error: HttpErrorResponse) {
+    debugger
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {
       // Get client-side error

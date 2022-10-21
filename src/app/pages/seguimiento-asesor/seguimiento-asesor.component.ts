@@ -7,7 +7,7 @@ import { ProyectosService } from 'src/app/services/proyectos.service';
 import { ToastService } from 'src/app/services/toast.service';
 import { Paginacion } from 'src/app/models/paginacion/paginacion';
 import { tablaProyecto } from 'src/app/models/Proyecto/Proyecto';
-
+import * as moment from 'moment';
 @Component({
   selector: 'app-seguimiento-asesor',
   templateUrl: './seguimiento-asesor.component.html',
@@ -41,6 +41,9 @@ export class SeguimientoAsesorComponent extends BaseFormComponent implements OnI
     actions: this.actions,
     pager: this.pager,
     columns: {
+      fecha: {
+        title: 'Fecha'
+      },
       name: {
         title: 'Nombre'
       },
@@ -52,12 +55,13 @@ export class SeguimientoAsesorComponent extends BaseFormComponent implements OnI
       },
       project: {
         title: 'Proyecto'
-      }
-      ,
+      },
+      origen: {
+        title: 'Origen'
+      },
       ultimo: {
         title: 'Ultimo Seguimiento'
-      }
-      ,
+      },
       estado: {
         title: 'Estado'
       }
@@ -122,13 +126,18 @@ export class SeguimientoAsesorComponent extends BaseFormComponent implements OnI
     this.table = new LocalDataSource;
     let dataUser: any = [];
     this.proyectos.rows.forEach((response:any) => {
+      let now = moment(response.FechaCreacion);
+      now.locale('es')
+      response.FechaCreacion = now.format('DD/MM/YYYY, h:mm a')
       dataUser.push(
         {
           id: response?.Id,
+          fecha: response?.FechaCreacion,
           name: response?.NombreCompleto,
           phone: response?.Telefono,
           email: response?.Correo,
           project: response?.Proyecto.Descripcion,
+          origen: response["Origen.Descripcion"],
         }
       );
     })

@@ -1,4 +1,4 @@
-<div class="container pt-5">
+<div class="mx-3 pt-5">
   <div class="row mb-3">
     <div class="col-12 col-md-12 mb-3">
       <mat-card>
@@ -24,7 +24,7 @@
               <div class="col-12 col-md-6">
                 <mat-form-field class="w-100" appearance="outline">
                   <mat-label>Correo</mat-label>
-                  <input type="email" matInput formControlName="Correo" required maxlength="50">
+                  <input type="email" matInput formControlName="Correo" required maxlength="70">
                   <mat-error *ngIf="validate('Correo')">
                     {{ check('Correo') }}
                   </mat-error>
@@ -35,12 +35,24 @@
               <div class="col-12 col-md-6">
                 <mat-form-field class="w-100" appearance="outline">
                   <mat-label>Telefono</mat-label>
-                  <input type="text" matInput formControlName="Telefono" maxlength="15">
+                  <input type="text" matInput formControlName="Telefono" maxlength="10">
                   <mat-error *ngIf="validate('Telefono')">
                     {{ check('Telefono') }}
                   </mat-error>
                 </mat-form-field>
               </div>
+              <div class="col-12 col-md-6">
+                <mat-form-field class="w-100" appearance="outline">
+                  <mat-label>Telefono (opcional)</mat-label>
+                  <input type="text" matInput formControlName="Telefono2" maxlength="10">
+                  <mat-error *ngIf="validate('Telefono2')">
+                    {{ check('Telefono2') }}
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+            </div>
+            <div class="row mb-3">
               <div class="col-12 col-md-6">
                 <mat-form-field class="w-100" appearance="outline">
                   <mat-label>Proyecto</mat-label>
@@ -52,9 +64,7 @@
                   </mat-error>
                 </mat-form-field>
               </div>
-            </div>
-            <div class="row mb-3">
-              <div class="col-12 col-md-12">
+              <div class="col-12 col-md-6">
                 <mat-form-field class="w-100" appearance="outline">
                   <mat-label>Origen</mat-label>
                   <mat-select  matNativeControl formControlName="OrigenId" required>

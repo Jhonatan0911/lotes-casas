@@ -120,8 +120,17 @@ export class OrigenesComponent implements OnInit {
     .afterClosed()
     .subscribe((confirmado: Boolean) => {
       if (confirmado) {
-        this.CombosService.deleteProyectos({Id: row.data.id});
-        this.cargaOrigenes();
+        let object = {
+          Id: row.data.id
+        }
+        this.CombosService.deleteOrigenes(object).subscribe({
+          next: (req: any) => {
+            this.cargaOrigenes();
+          },
+          error: (err: string) => {
+            this.toastService.showToast(err, 'error');
+          }
+        });;
       }
     });
   }

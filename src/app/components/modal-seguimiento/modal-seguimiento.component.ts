@@ -86,7 +86,7 @@ export class ModalSeguimientoComponent extends BaseFormComponent implements OnIn
           this.loading = false;
           this.form.reset();
           this.form.enable();
-          this.dialogRef.close(true);
+          this.cargarComentarios();
         },
       });
     }

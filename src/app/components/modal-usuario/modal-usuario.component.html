@@ -30,7 +30,7 @@
     <div class="col-12 col-md-6">
       <mat-form-field class="w-100" appearance="outline">
         <mat-label>Usuario</mat-label>
-        <input type="text" matInput formControlName="Usuario" maxlength="50" required>
+        <input type="text" matInput formControlName="Usuario" maxlength="10" required>
         <mat-error *ngIf="validate('Usuario')">
           {{ check('Usuario') }}
         </mat-error>
@@ -47,13 +47,30 @@
     </div>
   </div>
   <div class="row mb-3">
-    <div class="col-12 col-md-12">
+    <div class="col-12 col-md-6">
       <mat-form-field class="w-100" appearance="outline">
         <mat-label>Contraseña</mat-label>
-        <input type="password" matInput formControlName="Clave" minlength="6" required>
+        <input [type]="hidePassword ? 'password' : 'text'" matInput formControlName="Clave" minlength="6" required>
         <mat-error *ngIf="validate('Clave')">
           {{ check('Clave') }}
         </mat-error>
+        <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hidePassword">
+          <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+    <div class="col-12 col-md-6">
+      <mat-form-field class="w-100" appearance="outline">
+        <mat-label>Confirmar contraseña</mat-label>
+        <input [type]="hidePassword2 ? 'password' : 'text'" matInput formControlName="Clave2" minlength="6" required>
+        <mat-error *ngIf="validate('Clave2')">
+          {{ check('Clave2') }}
+        </mat-error>
+        <button mat-icon-button matSuffix (click)="hidePassword2 = !hidePassword2" [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hidePassword2">
+          <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
       </mat-form-field>
     </div>
   </div>

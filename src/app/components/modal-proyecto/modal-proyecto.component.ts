@@ -27,7 +27,7 @@ export class ModalProyectoComponent extends BaseFormComponent implements OnInit 
     Descripcion: new FormControl('',[
       Validators.required,
       Validators.minLength(3),
-      Validators.maxLength(50),
+      Validators.maxLength(250),
       Validators.pattern(this.latin)]
     )
   })

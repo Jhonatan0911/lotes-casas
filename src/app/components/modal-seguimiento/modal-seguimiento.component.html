@@ -33,19 +33,17 @@
       </mat-form-field>
     </div>
   </div>
-  <button mat-flat-button class="w-100 btn-primary" [disabled]="!form.valid || loading" type="submit">{{data.reasignacion ? "Reasignar" : "Asignar"}}</button>
+  <button mat-flat-button class="w-100 btn-primary" [disabled]="!form.valid || loading" type="submit">{{loading ? "Guardando" : "Guardar"}}</button>
 </form>
-<div class="col-12 px-5 mt-3">
-  <h3 class="center mb-3"> <strong> Proyecto - {{data.data.name}}</strong> </h3>
+<div class="col-12 px-5 mt-3 overflow-auto">
   <div *ngIf="comentarios.length <= 0">
     <h3 class="center mb-3"> <strong> Aún no hay comentarios </strong> </h3>
   </div>
   <div *ngIf="comentarios.length > 0">
-    <h4> <strong> Comentarios </strong> </h4>
+    <h4> <strong> Historicos seguimientos </strong> </h4>
     <br>
     <div *ngFor="let comentario of comentarios">
-      <p> <strong> Estado: </strong> {{comentario.EstadoSeguimiento.Descripcion}}</p>
-      <p class="mb-3"> {{comentario.Descripcion}} </p>
+      <p> {{comentario.FechaCreacion}} -  {{comentario.EstadoSeguimiento.Descripcion}} - {{comentario.Descripcion}}</p>
     </div>
   </div>
 </div>

@@ -4,6 +4,7 @@ import { BaseFormComponent } from 'src/app/components/baseComponent';
 import { ToastService } from 'src/app/services/toast.service';
 import { LoginService } from 'src/app/services/login.service';
 import { Router } from '@angular/router';
+import { ComunLayoutComponent } from 'src/app/layouts/comun-layout/comun-layout.component';
 
 @Component({
   selector: 'app-login',
